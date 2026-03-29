@@ -8,928 +8,381 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-  :root {
-    --bg: #FAFAF7;
-    --bg2: #F3F2EE;
-    --bg3: #ECEAE3;
-    --text: #1C1B18;
-    --text2: #6B6860;
-    --text3: #9C9A93;
-    --accent: #2D5016;
-    --accent2: #4A7C28;
-    --accent-light: #EBF2E3;
-    --accent-mid: #C8DFB0;
-    --border: rgba(28,27,24,0.1);
-    --border2: rgba(28,27,24,0.06);
-    --nav-w: 220px;
-    --danger: #8B2020;
-    --danger-bg: #FDF0F0;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    display: flex;
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  /* NAV */
-  nav {
-    width: var(--nav-w);
-    min-width: var(--nav-w);
-    height: 100vh;
-    position: fixed;
-    top: 0; left: 0;
-    background: var(--text);
-    display: flex;
-    flex-direction: column;
-    padding: 40px 0;
-    z-index: 100;
-  }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 300;
-    color: var(--bg);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0 28px 32px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    margin-bottom: 24px;
-  }
-
-  .nav-logo span {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.35);
-    margin-top: 4px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    text-transform: uppercase;
-  }
-
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 28px;
-    cursor: pointer;
-    color: rgba(255,255,255,0.45);
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    border-left: 2px solid transparent;
-    user-select: none;
-  }
-
-  .nav-item:hover { color: rgba(255,255,255,0.75); }
-
-  .nav-item.active {
-    color: #fff;
-    border-left-color: var(--accent2);
-  }
-
-  .nav-sub {
-    padding: 6px 28px 6px 44px;
-    cursor: pointer;
-    color: rgba(255,255,255,0.3);
-    font-size: 11px;
-    letter-spacing: 0.03em;
-    transition: color 0.2s;
-    user-select: none;
-  }
-
-  .nav-sub:hover { color: rgba(255,255,255,0.6); }
-  .nav-sub.active { color: rgba(255,255,255,0.85); }
-
-  .nav-dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: currentColor;
-    flex-shrink: 0;
-  }
-
-  /* MAIN */
-  main {
-    margin-left: var(--nav-w);
-    flex: 1;
-    min-height: 100vh;
-  }
-
-  /* SECTIONS */
-  .section {
-    display: none;
-    min-height: 100vh;
-    padding: 64px 72px;
-    max-width: 860px;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .section.active { display: block; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* TYPOGRAPHY */
-  .section-eyebrow {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 12px;
-  }
-
-  h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px;
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--text);
-    margin-bottom: 24px;
-    letter-spacing: -0.01em;
-  }
-
-  h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 20px;
-    line-height: 1.2;
-  }
-
-  .lead {
-    font-size: 17px;
-    line-height: 1.8;
-    color: var(--text2);
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    margin-bottom: 48px;
-    max-width: 600px;
-  }
-
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border2);
-    margin: 40px 0;
-  }
-
-  /* CARDS */
-  .card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px 28px;
-    margin-bottom: 12px;
-  }
-
-  .card-q {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border2);
-  }
-
-  .card-a {
-    font-size: 13.5px;
-    color: var(--text2);
-    line-height: 1.8;
-  }
-
-  .card-a p { margin-bottom: 10px; }
-  .card-a p:last-child { margin-bottom: 0; }
-  .card-a ol { margin: 8px 0 12px 20px; }
-  .card-a ol li { margin-bottom: 4px; }
-  .card-a strong { color: var(--text); font-weight: 500; }
-
-  .group-label {
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text3);
-    display: block;
-    margin: 14px 0 6px;
-  }
-  .group-label:first-child { margin-top: 0; }
-
-  /* SECTION LABEL */
-  .sec-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin: 36px 0 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border2);
-  }
-  .sec-label:first-of-type { margin-top: 0; }
-
-  /* METRIC CARDS */
-  .metric-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-
-  .metric {
-    background: var(--bg2);
-    border-radius: 10px;
-    padding: 16px 18px;
-  }
-
-  .metric-label {
-    font-size: 11px;
-    color: var(--text3);
-    margin-bottom: 6px;
-  }
-
-  .metric-value {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--text);
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  .metric-sub {
-    font-size: 11px;
-    color: var(--text3);
-    margin-top: 3px;
-  }
-
-  /* TABLES */
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    margin-bottom: 8px;
-  }
-
-  .data-table th {
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text3);
-    padding: 8px 12px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .data-table th.r { text-align: right; }
-
-  .data-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--border2);
-    color: var(--text2);
-    vertical-align: top;
-    line-height: 1.5;
-  }
-
-  .data-table td.r {
-    text-align: right;
-    color: var(--text);
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .data-table tr:last-child td { border-bottom: none; }
-
-  .data-table tr.subtotal td {
-    background: var(--bg2);
-    font-weight: 500;
-    color: var(--text);
-  }
-
-  .table-wrap {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 24px;
-  }
-
-  /* FASE */
-  .fase-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 16px 20px 0;
-  }
-
-  .fase-title { font-size: 14px; font-weight: 500; color: var(--text); }
-  .fase-total { font-size: 13px; font-weight: 500; color: var(--accent); }
-
-  /* YEAR CARDS */
-  .year-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 24px;
-  }
-
-  .year-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px 18px;
-  }
-
-  .year-card.hl { border-color: var(--accent2); }
-
-  .year-label { font-size: 10px; color: var(--text3); margin-bottom: 4px; }
-  .year-value { font-size: 20px; font-weight: 500; font-family: 'Cormorant Garamond', serif; color: var(--text); margin-bottom: 4px; }
-  .year-desc { font-size: 11px; color: var(--text3); line-height: 1.5; }
-
-  /* CHART */
-  .chart-container {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    margin-bottom: 32px;
-  }
-
-  /* LEGEND */
-  .legend {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--text2);
-  }
-
-  .legend-box {
-    width: 10px; height: 10px;
-    border-radius: 2px;
-  }
-
-  /* TAGS */
-  .tag-bad {
-    font-size: 10px;
-    font-weight: 500;
-    background: var(--danger-bg);
-    color: var(--danger);
-    border-radius: 3px;
-    padding: 1px 6px;
-    display: inline-block;
-    margin-top: 4px;
-  }
-
-  .tag-good {
-    font-size: 10px;
-    font-weight: 500;
-    background: var(--accent-light);
-    color: var(--accent);
-    border-radius: 3px;
-    padding: 1px 6px;
-    display: inline-block;
-    margin-top: 4px;
-  }
-
-  .tag-strong {
-    font-size: 10px;
-    font-weight: 500;
-    background: var(--accent-mid);
-    color: var(--accent);
-    border-radius: 3px;
-    padding: 1px 6px;
-    display: inline-block;
-    margin-top: 4px;
-  }
-
-  /* COMPARE TABLE */
-  .compare-wrap {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 24px;
-  }
-
-  .compare-header {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-  }
-
-  .compare-header-blank { padding: 12px; background: var(--bg); }
-
-  .compare-header-wework {
-    padding: 12px 16px;
-    background: var(--bg2);
-    font-size: 13px;
-    font-weight: 500;
-    text-align: center;
-    color: var(--text);
-    border-left: 1px solid var(--border);
-  }
-
-  .compare-header-celeiro {
-    padding: 12px 16px;
-    background: var(--accent-light);
-    font-size: 13px;
-    font-weight: 500;
-    text-align: center;
-    color: var(--accent);
-    border-left: 1px solid var(--border);
-  }
-
-  .compare-row {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    border-top: 1px solid var(--border2);
-  }
-
-  .compare-row.hl .compare-celeiro { background: #D8EDCA; }
-
-  .compare-label {
-    padding: 14px 16px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text);
-    border-right: 1px solid var(--border2);
-    display: flex;
-    align-items: flex-start;
-  }
-
-  .compare-wework {
-    padding: 14px 16px;
-    font-size: 12px;
-    color: var(--text2);
-    background: var(--bg2);
-    border-right: 1px solid var(--border2);
-    line-height: 1.6;
-  }
-
-  .compare-celeiro {
-    padding: 14px 16px;
-    font-size: 12px;
-    color: var(--accent);
-    background: var(--accent-light);
-    line-height: 1.6;
-  }
-
-  /* VERDICT */
-  .verdict-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 20px;
-  }
-
-  .verdict-card {
-    border-radius: 10px;
-    padding: 16px 18px;
-  }
-
-  .verdict-wework {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-  }
-
-  .verdict-celeiro {
-    background: var(--accent-light);
-    border: 1px solid var(--accent-mid);
-  }
-
-  .verdict-title {
-    font-size: 12px;
-    font-weight: 500;
-    margin-bottom: 8px;
-  }
-
-  .verdict-wework .verdict-title { color: var(--text); }
-  .verdict-celeiro .verdict-title { color: var(--accent); }
-
-  .verdict-body { font-size: 12px; line-height: 1.7; }
-  .verdict-wework .verdict-body { color: var(--text2); }
-  .verdict-celeiro .verdict-body { color: var(--accent); opacity: 0.85; }
-
-  /* ECOSYSTEM BOX */
-  .eco-box {
-    background: var(--accent-light);
-    border: 1px solid var(--accent-mid);
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-top: 16px;
-  }
-
-  .eco-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-
-  .eco-body {
-    font-size: 12px;
-    color: var(--accent);
-    opacity: 0.85;
-    line-height: 1.7;
-  }
-
-  /* FLOW CARDS */
-  .flow-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  .flow-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-
-  .flow-card.hl { border-color: var(--accent2); }
-
-  .flow-year { font-size: 10px; color: var(--text3); margin-bottom: 4px; }
-  .flow-title { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
-  .flow-body { font-size: 11px; color: var(--text2); line-height: 1.6; }
-  .flow-value { font-size: 13px; font-weight: 500; color: var(--accent); margin-top: 8px; }
-
-  /* IMAGINE / GALLERY */
-  .imagine-intro {
-    font-size: 17px;
-    line-height: 1.8;
-    color: var(--text2);
-    font-family: 'Cormorant Garamond', serif;
-    margin-bottom: 40px;
-    max-width: 560px;
-  }
-
-  .gallery-section { margin-bottom: 40px; }
-  .gallery-title { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border2); }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-
-  .gallery-item {
-    background: var(--bg2);
-    border-radius: 10px;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border2);
-    cursor: pointer;
-    transition: border-color 0.2s;
-  }
-
-  .gallery-item:hover { border-color: var(--border); }
-
-  .gallery-placeholder {
-    font-size: 11px;
-    color: var(--text3);
-    text-align: center;
-    padding: 16px;
-    line-height: 1.6;
-  }
-
-  .gallery-icon {
-    width: 28px;
-    height: 28px;
-    margin-bottom: 8px;
-    opacity: 0.3;
-  }
-
-  /* OBS */
-  .obs {
-    font-size: 11px;
-    color: var(--text3);
-    line-height: 1.6;
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid var(--border2);
-  }
-
-  /* PERSON */
-  .person-block { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border2); }
-  .person-block:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-  .person-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
-
-  /* TOTAL ROW */
-  .total-row {
-    background: var(--text);
-    border-radius: 10px;
-    padding: 16px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 32px;
-  }
-  .total-label { font-size: 13px; color: rgba(255,255,255,0.6); }
-  .total-value { font-size: 22px; font-weight: 500; color: #fff; font-family: 'Cormorant Garamond', serif; }
-
-  /* TIMELINE */
-  .timeline-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-
-  .tl-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 14px;
-  }
-
-  .tl-num { font-size: 10px; color: var(--text3); margin-bottom: 4px; }
-  .tl-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 4px; line-height: 1.4; }
-  .tl-dur { font-size: 11px; color: var(--text3); }
-
-  .badge-revisar {
-    font-size: 10px;
-    font-weight: 500;
-    background: #FEF3C7;
-    color: #92400E;
-    border-radius: 3px;
-    padding: 1px 6px;
-    margin-left: 6px;
-    vertical-align: middle;
-  }
+:root {
+  --bg: #FAFAF7; --bg2: #F3F2EE; --bg3: #ECEAE3;
+  --text: #1C1B18; --text2: #6B6860; --text3: #9C9A93;
+  --accent: #2D5016; --accent2: #4A7C28;
+  --accent-light: #EBF2E3; --accent-mid: #C8DFB0;
+  --border: rgba(28,27,24,0.1); --border2: rgba(28,27,24,0.06);
+  --nav-w: 220px; --danger: #8B2020; --danger-bg: #FDF0F0;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'DM Sans', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 14px; line-height: 1.7; }
+
+/* NAV */
+nav { width: var(--nav-w); min-width: var(--nav-w); height: 100vh; position: fixed; top: 0; left: 0; background: var(--text); display: flex; flex-direction: column; padding: 40px 0; z-index: 100; overflow-y: auto; }
+.nav-logo { font-family: var(--font-serif); font-size: 20px; font-weight: 300; color: var(--bg); letter-spacing: 0.12em; text-transform: uppercase; padding: 0 28px 28px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px; }
+.nav-logo span { display: block; font-size: 9px; letter-spacing: 0.2em; color: rgba(255,255,255,0.3); margin-top: 4px; font-family: var(--font-sans); font-weight: 300; text-transform: uppercase; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 28px; cursor: pointer; color: rgba(255,255,255,0.4); font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; border-left: 2px solid transparent; user-select: none; }
+.nav-item:hover { color: rgba(255,255,255,0.7); }
+.nav-item.active { color: #fff; border-left-color: var(--accent2); }
+.nav-sub { padding: 5px 28px 5px 44px; cursor: pointer; color: rgba(255,255,255,0.28); font-size: 11px; transition: color 0.2s; user-select: none; }
+.nav-sub:hover { color: rgba(255,255,255,0.55); }
+.nav-dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+/* MAIN */
+main { margin-left: var(--nav-w); flex: 1; }
+.section { display: none; min-height: 100vh; padding: 60px 72px 80px; max-width: 920px; animation: fadeIn 0.25s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* LAYOUT WITH SIDEBAR */
+.content-with-sidebar { display: grid; grid-template-columns: 1fr 260px; gap: 32px; align-items: start; }
+.sidebar-photos { position: sticky; top: 32px; }
+.sidebar-title { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+.photo-slot { background: var(--bg2); border: 1px dashed var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; aspect-ratio: 4/3; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; }
+.photo-slot:hover { border-color: var(--accent2); background: var(--accent-light); }
+.photo-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+.photo-slot-label { font-size: 11px; color: var(--text3); text-align: center; line-height: 1.5; padding: 12px; z-index: 1; }
+.photo-slot input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 2; }
+.upload-icon { margin-bottom: 6px; opacity: 0.35; }
+
+/* TYPOGRAPHY */
+.eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
+h1 { font-family: var(--font-serif); font-size: 48px; font-weight: 300; line-height: 1.12; color: var(--text); margin-bottom: 24px; }
+.lead { font-family: var(--font-serif); font-size: 16px; line-height: 1.85; color: var(--text2); margin-bottom: 40px; max-width: 580px; font-weight: 400; }
+.sec-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border2); }
+hr.div { border: none; border-top: 1px solid var(--border2); margin: 32px 0; }
+
+/* FAQ CARDS */
+.faq { background: #fff; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+.faq-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; cursor: pointer; user-select: none; gap: 12px; }
+.faq-header:hover { background: var(--bg2); }
+.faq-q { font-family: var(--font-sans); font-size: 13.5px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.4; }
+.faq-arrow { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.2s; color: var(--text3); }
+.faq-arrow svg { width: 14px; height: 14px; }
+.faq.open .faq-arrow { transform: rotate(90deg); }
+.faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq.open .faq-body { max-height: 1200px; }
+.faq-a { padding: 0 20px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); line-height: 1.8; border-top: 1px solid var(--border2); padding-top: 14px; margin-top: 0; }
+.faq-a p { margin-bottom: 10px; }
+.faq-a p:last-child { margin-bottom: 0; }
+.faq-a ol { margin: 8px 0 12px 20px; }
+.faq-a ol li { margin-bottom: 4px; }
+.faq-a strong { color: var(--text); font-weight: 500; }
+.group-lbl { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); display: block; margin: 12px 0 4px; }
+.group-lbl:first-child { margin-top: 0; }
+
+/* PERSON */
+.person { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border2); }
+.person:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.person-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+
+/* METRICS */
+.metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
+.metric { background: var(--bg2); border-radius: 10px; padding: 14px 16px; }
+.metric-label { font-size: 11px; color: var(--text3); margin-bottom: 5px; }
+.metric-value { font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--text); }
+.metric-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* TABLES */
+.table-wrap { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+.fase-header { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 18px 0; }
+.fase-title { font-size: 13px; font-weight: 500; color: var(--text); }
+.fase-total { font-size: 12px; font-weight: 500; color: var(--accent); }
+table.dt { width: 100%; border-collapse: collapse; margin-top: 10px; }
+table.dt th { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3); padding: 7px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+table.dt th.r { text-align: right; }
+table.dt td { padding: 9px 18px; border-bottom: 1px solid var(--border2); color: var(--text2); font-size: 12px; line-height: 1.5; vertical-align: top; }
+table.dt td.r { text-align: right; color: var(--text); font-weight: 500; white-space: nowrap; }
+table.dt tr:last-child td { border-bottom: none; }
+table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text); font-size: 12px; }
+
+/* YEAR CARDS */
+.year-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+.year-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.year-card.hl { border-color: var(--accent2); }
+.year-label { font-size: 10px; color: var(--text3); margin-bottom: 4px; }
+.year-value { font-family: var(--font-serif); font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 4px; }
+.year-desc { font-size: 11px; color: var(--text3); line-height: 1.5; }
+
+/* CHART */
+.chart-wrap { position: relative; width: 100%; height: 280px; margin-bottom: 28px; }
+.legend { display: flex; gap: 18px; margin-bottom: 12px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); }
+.legend-box { width: 10px; height: 10px; border-radius: 2px; }
+
+/* TOTAL */
+.total-row { background: var(--text); border-radius: 10px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; margin: 16px 0 28px; }
+.total-label { font-size: 12px; color: rgba(255,255,255,0.55); }
+.total-value { font-family: var(--font-serif); font-size: 22px; color: #fff; font-weight: 300; }
+
+/* TIMELINE */
+.tl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 28px; }
+.tl-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 11px 13px; }
+.tl-num { font-size: 10px; color: var(--text3); margin-bottom: 3px; }
+.tl-name { font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 3px; line-height: 1.4; }
+.tl-dur { font-size: 11px; color: var(--text3); }
+
+/* ECO BOX */
+.eco-box { background: var(--accent-light); border: 1px solid var(--accent-mid); border-radius: 12px; padding: 18px 22px; margin-top: 14px; }
+.eco-title { font-size: 13px; font-weight: 500; color: var(--accent); margin-bottom: 6px; }
+.eco-body { font-size: 12px; color: var(--accent); opacity: 0.85; line-height: 1.7; }
+
+/* FLOW */
+.flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+.flow-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 13px 15px; }
+.flow-card.hl { border-color: var(--accent2); }
+.flow-year { font-size: 10px; color: var(--text3); margin-bottom: 3px; }
+.flow-title { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 5px; line-height: 1.4; }
+.flow-body { font-size: 11px; color: var(--text2); line-height: 1.6; }
+.flow-value { font-size: 12px; font-weight: 500; color: var(--accent); margin-top: 7px; }
+
+/* TAGS */
+.tag-bad { font-size: 10px; font-weight: 500; background: var(--danger-bg); color: var(--danger); border-radius: 3px; padding: 1px 6px; display: inline-block; margin-top: 4px; }
+.tag-good { font-size: 10px; font-weight: 500; background: var(--accent-light); color: var(--accent); border-radius: 3px; padding: 1px 6px; display: inline-block; margin-top: 4px; }
+.tag-strong { font-size: 10px; font-weight: 500; background: var(--accent-mid); color: var(--accent); border-radius: 3px; padding: 1px 6px; display: inline-block; margin-top: 4px; }
+
+/* COMPARE */
+.compare-wrap { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+.compare-header { display: grid; grid-template-columns: 1.4fr 1fr 1fr; }
+.ch-blank { padding: 11px; background: var(--bg); }
+.ch-wework { padding: 11px 14px; background: var(--bg2); font-size: 12px; font-weight: 500; text-align: center; color: var(--text); border-left: 1px solid var(--border); }
+.ch-celeiro { padding: 11px 14px; background: var(--accent-light); font-size: 12px; font-weight: 500; text-align: center; color: var(--accent); border-left: 1px solid var(--border); }
+.compare-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; border-top: 1px solid var(--border2); }
+.compare-row.hl .cr-celeiro { background: #D4ECC0; }
+.cr-label { padding: 13px 14px; font-size: 12px; font-weight: 500; color: var(--text); border-right: 1px solid var(--border2); display: flex; align-items: flex-start; }
+.cr-wework { padding: 13px 14px; font-size: 11px; color: var(--text2); background: var(--bg2); border-right: 1px solid var(--border2); line-height: 1.6; }
+.cr-celeiro { padding: 13px 14px; font-size: 11px; color: var(--accent); background: var(--accent-light); line-height: 1.6; }
+
+/* VERDICT */
+.verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+.verdict-card { border-radius: 10px; padding: 15px 17px; }
+.verdict-wework { background: var(--bg2); border: 1px solid var(--border); }
+.verdict-celeiro { background: var(--accent-light); border: 1px solid var(--accent-mid); }
+.verdict-title { font-size: 12px; font-weight: 500; margin-bottom: 7px; }
+.verdict-wework .verdict-title { color: var(--text); }
+.verdict-celeiro .verdict-title { color: var(--accent); }
+.verdict-body { font-size: 11px; line-height: 1.7; }
+.verdict-wework .verdict-body { color: var(--text2); }
+.verdict-celeiro .verdict-body { color: var(--accent); opacity: 0.85; }
+
+/* COMPARE INTRO */
+.compare-intro { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; }
+.compare-intro p { font-family: var(--font-sans); font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 10px; }
+.compare-intro p:last-child { margin-bottom: 0; }
+
+/* IMAGINE */
+.imagine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
+.img-slot { background: var(--bg2); border: 1px dashed var(--border); border-radius: 10px; aspect-ratio: 4/3; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; overflow: hidden; }
+.img-slot:hover { border-color: var(--accent2); background: var(--accent-light); }
+.img-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.img-slot input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 2; }
+.img-slot-label { font-size: 11px; color: var(--text3); text-align: center; line-height: 1.5; padding: 10px; z-index: 1; }
+.img-caption { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin: 8px 0 16px; }
+
+/* FUTURE / ARTICLE */
+.article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+.article-source { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); }
+.article-date { font-size: 11px; color: var(--text3); }
+.article-tag { font-size: 10px; font-weight: 500; background: var(--accent-light); color: var(--accent); border-radius: 3px; padding: 2px 7px; }
+.article-headline { font-family: var(--font-serif); font-size: 40px; font-weight: 400; line-height: 1.15; color: var(--text); margin-bottom: 10px; max-width: 620px; }
+.article-subhead { font-family: var(--font-serif); font-size: 18px; font-weight: 300; color: var(--text2); line-height: 1.5; margin-bottom: 32px; max-width: 580px; font-style: italic; }
+.article-divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+.article-body { max-width: 620px; }
+.article-body p { font-family: var(--font-sans); font-size: 14px; color: var(--text2); line-height: 1.9; margin-bottom: 18px; }
+.article-body h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--text); margin: 32px 0 12px; }
+.article-pullquote { font-family: var(--font-serif); font-size: 20px; font-weight: 300; font-style: italic; color: var(--accent); border-left: 3px solid var(--accent-mid); padding: 12px 20px; margin: 28px 0; line-height: 1.6; }
+.article-byline { font-size: 11px; color: var(--text3); margin-bottom: 28px; }
+.obs { font-size: 11px; color: var(--text3); line-height: 1.6; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border2); }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">
-    O Celeiro
-    <span>Proposta de investimento</span>
-  </div>
-
-  <div class="nav-item active" onclick="showSection('identidade', this)">
-    <span class="nav-dot"></span> Identidade
-  </div>
-  <div class="nav-item" onclick="showSection('modelo', this)">
-    <span class="nav-dot"></span> Modelo de Negócio
-  </div>
-  <div class="nav-item" onclick="showSection('numeros', this)" id="nav-numeros">
-    <span class="nav-dot"></span> Números
-  </div>
-  <div class="nav-sub" onclick="showSection('numeros', document.getElementById('nav-numeros')); scrollTo('sub-fases')">Fases</div>
-  <div class="nav-sub" onclick="showSection('numeros', document.getElementById('nav-numeros')); scrollTo('sub-receitas')">Receitas</div>
-  <div class="nav-sub" onclick="showSection('numeros', document.getElementById('nav-numeros')); scrollTo('sub-ecossistema')">Ecossistema</div>
-  <div class="nav-item" onclick="showSection('comparativo', this)">
-    <span class="nav-dot"></span> Comparativo
-  </div>
-  <div class="nav-item" onclick="showSection('imagine', this)">
-    <span class="nav-dot"></span> Imagine
-  </div>
+  <div class="nav-logo">O Celeiro<span>Proposta de investimento</span></div>
+  <div class="nav-item active" onclick="show('identidade',this)"><span class="nav-dot"></span>Identidade</div>
+  <div class="nav-item" onclick="show('modelo',this)"><span class="nav-dot"></span>Modelo de Negócio</div>
+  <div class="nav-item" onclick="show('numeros',this)" id="nav-num"><span class="nav-dot"></span>Números</div>
+  <div class="nav-sub" onclick="show('numeros',document.getElementById('nav-num'));goTo('sub-fases')">Fases</div>
+  <div class="nav-sub" onclick="show('numeros',document.getElementById('nav-num'));goTo('sub-receitas')">Receitas</div>
+  <div class="nav-sub" onclick="show('numeros',document.getElementById('nav-num'));goTo('sub-eco')">Ecossistema</div>
+  <div class="nav-item" onclick="show('comparativo',this)"><span class="nav-dot"></span>Comparativo</div>
+  <div class="nav-item" onclick="show('imagine',this)"><span class="nav-dot"></span>Imagine</div>
+  <div class="nav-item" onclick="show('futuro',this)"><span class="nav-dot"></span>Futuro</div>
 </nav>
 
 <main>
 
 <!-- IDENTIDADE -->
 <section class="section active" id="identidade">
-  <div class="section-eyebrow">Identidade</div>
-  <h1>O Celeiro</h1>
-  <p class="lead">Somos um grupo de amigos e empreendedores cristãos que, por coincidências divinas, nos últimos anos foram convidados a trabalhar e viver na cidade de Indaiatuba. A partir daqui são realizadas operações, movimentos e iniciativas que impactam o reino e alcançam diversas cidades no Brasil.<br><br>Resolvemos construir a casa física dessas iniciativas.<br>Ela será um Celeiro e vai inspirar o mundo.</p>
+  <div class="content-with-sidebar">
+    <div>
+      <div class="eyebrow">Identidade</div>
+      <h1>O Celeiro</h1>
+      <p class="lead">Somos dois amigos e empreendedores cristãos que, por conexão divina, nos últimos anos foram convidados a trabalhar e viver na cidade de Indaiatuba. A partir dessa cidade são realizadas operações, movimentos e iniciativas que impactam o reino e alcançam diversas cidades no Brasil.<br><br>Resolvemos construir a casa física dessas iniciativas.<br>Ela será um Celeiro e vai inspirar o mundo.</p>
 
-  <div class="card">
-    <div class="card-q">Contexto e histórico</div>
-    <div class="card-a">
-      <p>Anos atrás, o fundador da Envisionar, Josué Campanhã, indicou o Fábio Dudus para ser chair do C12 em Campinas e São Paulo. Ele também convidou Vini Trindade, que prontamente mudou-se com a família, para ser sócio e Head de Inovação e Marketing da Envisionar. O Fábio conheceu o Vini, uma amizade começou, e ao longo dos anos os dois experimentaram diversas ideias, combinações e conexões de negócios.</p>
-      <p>Vini é sócio na Envisionar, que representa no Brasil o Global Leadership Summit, maior movimento de formação de líderes global, presente em 115 países e traduzido para mais de 50 idiomas.</p>
-      <p>Fábio é chair do C12 Campinas e C12 São Paulo, uma organização global parceira do Global Leadership Summit nos EUA, com foco em unir grandes empresários e grandes propósitos.</p>
-      <p>Vini e Fábio, juntamente com a equipe da Envisionar e do C12, têm experimentado nos últimos anos diversas parcerias estratégicas com foco em negócios que gerem impacto para o reino.</p>
+      <div class="faq">
+        <div class="faq-header" onclick="toggleFaq(this)">
+          <span class="faq-q">Contexto e histórico</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="faq-body"><div class="faq-a">
+          <p>Anos atrás, o fundador da Envisionar, Josué Campanhã, indicou o Fábio Dudus para ser chair do C12 em Campinas e São Paulo. Ele também convidou Vini Trindade, que prontamente mudou-se com a família, para ser sócio e Head de Inovação e Marketing da Envisionar. O Fábio conheceu o Vini, uma amizade começou, e ao longo dos anos os dois experimentaram diversas ideias, combinações e conexões de negócios.</p>
+          <p>Vini é sócio na Envisionar, que representa no Brasil o Global Leadership Summit, maior movimento de formação de líderes global, presente em 115 países e traduzido para mais de 50 idiomas. No Brasil, geram impacto na sociedade por meio de igrejas, empresas e ações sociais em áreas estratégicas da sociedade.</p>
+          <p>Fábio é chair do C12 Campinas e C12 São Paulo, uma organização global parceira do Global Leadership Summit nos EUA, com foco em unir grandes empresários e grandes propósitos. No Brasil, o C12 tem chairs e grupos em diversas cidades e capitais estratégicas.</p>
+          <p>Vini e Fábio, juntamente com a equipe da Envisionar e do C12, têm experimentado nos últimos anos diversas parcerias estratégicas com foco em negócios que gerem impacto para o reino.</p>
+        </div></div>
+      </div>
+
+      <div class="faq">
+        <div class="faq-header" onclick="toggleFaq(this)">
+          <span class="faq-q">O que é o Celeiro?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="faq-body"><div class="faq-a"><p>Um hub de inovação e generosidade, que conecta negócios com propósito, desenvolve líderes estratégicos e serve a cidade com abundância.</p></div></div>
+      </div>
+
+      <div class="faq">
+        <div class="faq-header" onclick="toggleFaq(this)">
+          <span class="faq-q">Por que o nome Celeiro?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="faq-body"><div class="faq-a"><p>O empreendimento terá arquitetura tradicional de um celeiro americano — para passar o significado visual e literal do nome. Um celeiro é, por natureza, um lugar de provisão abundante. O nome carrega a essência do local: conectar e produzir recursos que sirvam generosamente à cidade.</p></div></div>
+      </div>
+
+      <div class="faq">
+        <div class="faq-header" onclick="toggleFaq(this)">
+          <span class="faq-q">Qual é o propósito?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="faq-body"><div class="faq-a"><p>Construir um hub local em Indaiatuba que une inovação e generosidade, conecta negócios com propósito, desenvolve líderes estratégicos e serve a cidade com abundância — com sua jornada sendo contada desde o início para gerar influência local e global.</p></div></div>
+      </div>
+
+      <div class="faq">
+        <div class="faq-header" onclick="toggleFaq(this)">
+          <span class="faq-q">Qual é a visão?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="faq-body"><div class="faq-a">
+          <p>Cidades Celeiros. Por todo o Brasil.</p>
+          <p>Cidades que recebem um Celeiro ganham o selo de "Cidade Celeiro" — um reconhecimento e certificação que ativa uma rede de benefícios: acesso a negócios com propósito, formação de líderes estratégicos e iniciativas de impacto social. Um ecossistema que se multiplica cidade a cidade.</p>
+        </div></div>
+      </div>
+
+      <div class="faq">
+        <div class="faq-header" onclick="toggleFaq(this)">
+          <span class="faq-q">O que torna o modelo único?</span>
+          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="faq-body"><div class="faq-a"><p>Coworkings tradicionais têm ótimos espaços, mas operam sem propósito redentor. Igrejas têm o propósito, mas raramente têm espaços corporativos abertos à cidade. O Celeiro une o melhor dos dois mundos — espaço físico pensado para conexão e inovação, dentro de um ecossistema de generosidade e liderança servidora. Fé e negócios. Em um só lugar. Não apenas sustentável. Abundante.</p></div></div>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-q">O que é o Celeiro?</div>
-    <div class="card-a">Um hub de inovação e generosidade, que conecta negócios com propósito, desenvolve líderes estratégicos e serve a cidade com abundância.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-q">Por que o nome Celeiro?</div>
-    <div class="card-a">O empreendimento terá arquitetura tradicional de um celeiro americano — para passar o significado visual e literal do nome. Um celeiro é, por natureza, um lugar de provisão abundante. O nome carrega a essência do local: conectar e produzir recursos que sirvam generosamente à cidade.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-q">Qual é o propósito?</div>
-    <div class="card-a">Construir um hub local em Indaiatuba que une inovação e generosidade, conecta negócios com propósito, desenvolve líderes estratégicos e serve a cidade com abundância — com sua jornada sendo contada desde o início para gerar influência local e global.</div>
-  </div>
-
-  <div class="card">
-    <div class="card-q">Qual é a visão?</div>
-    <div class="card-a">
-      <p>Cidades Celeiros. Por todo o Brasil.</p>
-      <p>Cidades que recebem um Celeiro ganham o selo de "Cidade Celeiro" — um reconhecimento e certificação que ativa uma rede de benefícios: acesso a negócios com propósito, formação de líderes estratégicos e iniciativas de impacto social. Um ecossistema que se multiplica cidade a cidade.</p>
+    <div class="sidebar-photos">
+      <div class="sidebar-title">Rabiscos do projeto</div>
+      <div class="photo-slot" id="slot1">
+        <input type="file" accept="image/*" onchange="loadImg(this,'slot1')">
+        <svg class="upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <div class="photo-slot-label">Clique para subir<br>foto ou rabisco</div>
+      </div>
+      <div class="photo-slot" id="slot2">
+        <input type="file" accept="image/*" onchange="loadImg(this,'slot2')">
+        <svg class="upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <div class="photo-slot-label">Clique para subir<br>foto ou rabisco</div>
+      </div>
+      <div class="photo-slot" id="slot3">
+        <input type="file" accept="image/*" onchange="loadImg(this,'slot3')">
+        <svg class="upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <div class="photo-slot-label">Clique para subir<br>foto ou rabisco</div>
+      </div>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="card-q">O que torna o modelo único?</div>
-    <div class="card-a">Coworkings tradicionais têm ótimos espaços, mas operam sem propósito redentor. Igrejas têm o propósito, mas raramente têm espaços corporativos abertos à cidade. O Celeiro une o melhor dos dois mundos — espaço físico pensado para conexão e inovação, dentro de um ecossistema de generosidade e liderança servidora. Fé e negócios. Em um só lugar. Não apenas sustentável. Abundante.</div>
   </div>
 </section>
 
-<!-- MODELO DE NEGÓCIO -->
+<!-- MODELO -->
 <section class="section" id="modelo">
-  <div class="section-eyebrow">Modelo de Negócio</div>
+  <div class="eyebrow">Modelo de Negócio</div>
   <h1>Como opera</h1>
 
-  <div class="card">
-    <div class="card-q">Como isso ganha dinheiro?</div>
-    <div class="card-a">
-      <span class="group-label">Receita recorrente — área interna</span>
-      <ol>
-        <li><strong>Coworking</strong>: aluguel de espaços para empresas estratégicas</li>
-        <li><strong>Capacitações</strong>: imersões, mentorias, trilhas de liderança, consultorias</li>
-        <li><strong>Eventos</strong>: corporativos, masterminds, conferências, rodadas de negócios</li>
-        <li><strong>Alimentação</strong>: cafeteria</li>
-        <li><strong>Outros produtos</strong>: livros, camisas, acessórios do ecossistema</li>
-      </ol>
-      <span class="group-label">Receita recorrente — área externa</span>
-      <ol>
-        <li><strong>Casamentos</strong>: aluguel da área externa para casamentos, noivados, pré-wedding</li>
-        <li><strong>Cerimônias</strong>: formaturas, aniversários e celebrações</li>
-        <li><strong>Cultura</strong>: eventos em parceria com a cidade (ex: orquestra sinfônica)</li>
-        <li><strong>Eventos estratégicos</strong>: jantares para captação de investimentos</li>
-        <li><strong>Ensaios fotográficos</strong>: pré-wedding, newborn</li>
-      </ol>
-      <p>O Celeiro monetiza espaços, relacionamentos e desenvolvimento de líderes — de forma recorrente e complementar. Diversificado, 7 dias na semana. Aberto ou fechado, o Celeiro gera receita.</p>
-    </div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Como isso ganha dinheiro?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a">
+    <span class="group-lbl">Receita recorrente — área interna</span>
+    <ol><li><strong>Coworking</strong>: aluguel de espaços para empresas estratégicas</li><li><strong>Capacitações</strong>: imersões, mentorias, trilhas de liderança, consultorias</li><li><strong>Eventos</strong>: corporativos, masterminds, conferências, rodadas de negócios</li><li><strong>Alimentação</strong>: cafeteria</li><li><strong>Outros produtos</strong>: livros, camisas, acessórios do ecossistema</li></ol>
+    <span class="group-lbl">Receita recorrente — área externa</span>
+    <ol><li><strong>Casamentos</strong>: aluguel da área externa para casamentos, noivados, pré-wedding</li><li><strong>Cerimônias</strong>: formaturas, aniversários e celebrações</li><li><strong>Cultura</strong>: eventos em parceria com a cidade (ex: orquestra sinfônica)</li><li><strong>Eventos estratégicos</strong>: jantares para captação de investimentos</li><li><strong>Ensaios fotográficos</strong>: pré-wedding, newborn</li></ol>
+    <p>O Celeiro monetiza espaços, relacionamentos e desenvolvimento de líderes — de forma recorrente e complementar. Diversificado, 7 dias na semana. Aberto ou fechado, o Celeiro gera receita.</p>
+  </div></div></div>
 
-  <div class="card">
-    <div class="card-q">Isso é um negócio sustentável?</div>
-    <div class="card-a">
-      <p>Sim. O Celeiro foi desenhado para operar com autonomia financeira desde o início — sem depender de doações para funcionar.</p>
-      <p>Este não é um investimento com retorno financeiro. É um investimento no reino — numa obra que serve a cidade, forma líderes e multiplica impacto. O retorno é de outra natureza: ver negócios transformados, líderes formados e uma cidade que sente a diferença.</p>
-      <p>Quem investe no Celeiro não busca dividendos. Busca participar de algo que dura.</p>
-    </div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Isso é um negócio sustentável?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a">
+    <p>Sim. O Celeiro foi desenhado para operar com autonomia financeira desde o início — sem depender de doações para funcionar.</p>
+    <p>Este não é um investimento com retorno financeiro. É um investimento no reino — numa obra que serve a cidade, forma líderes e multiplica impacto. O retorno é de outra natureza: ver negócios transformados, líderes formados e uma cidade que sente a diferença.</p>
+    <p>Quem investe no Celeiro não busca dividendos. Busca participar de algo que dura.</p>
+  </div></div></div>
 
-  <div class="card">
-    <div class="card-q">Por que alguém escolheria o Celeiro?</div>
-    <div class="card-a">
-      <p>Porque o Celeiro não vende espaço — vende pertencimento. Quem entra não aluga uma mesa. Entra num ecossistema de líderes com propósito, onde cada conexão tem potencial de gerar impacto real na cidade.</p>
-      <p>Num mundo onde empresários cristãos buscam integrar fé e negócios, o Celeiro oferece o ambiente que faltava — bonito, funcional, intencional. Com formação de liderança, parceiros estratégicos e uma cultura de generosidade que atrai quem quer construir algo que vai além do lucro.</p>
-    </div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Por que alguém escolheria o Celeiro?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a">
+    <p>Porque o Celeiro não vende espaço — vende pertencimento. Quem entra não aluga uma mesa. Entra num ecossistema de líderes com propósito, onde cada conexão tem potencial de gerar impacto real na cidade.</p>
+    <p>Num mundo onde empresários cristãos buscam integrar fé e negócios, o Celeiro oferece o ambiente que faltava — bonito, funcional, intencional. Com formação de liderança, parceiros estratégicos e uma cultura de generosidade que atrai quem quer construir algo que vai além do lucro.</p>
+  </div></div></div>
 
-  <div class="card">
-    <div class="card-q">Isso escala?</div>
-    <div class="card-a">Sim. O modelo é replicável em qualquer cidade estratégica da rede Envisionar/C12. A lógica de integrar espaço, formação e comunidade pode ser aplicada em diferentes contextos urbanos — e o selo Cidade Celeiro cria um sistema de expansão com identidade e padrão.</div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Isso escala?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>Sim. O modelo é replicável em qualquer cidade estratégica da rede Envisionar/C12. A lógica de integrar espaço, formação e comunidade pode ser aplicada em diferentes contextos urbanos — e o selo Cidade Celeiro cria um sistema de expansão com identidade e padrão.</p></div></div></div>
 
-  <div class="card">
-    <div class="card-q">Qual o maior risco?</div>
-    <div class="card-a">O principal risco está na execução integrada do modelo — garantir que espaço, cultura e operação funcionem de forma consistente. Para mitigar isso, o Celeiro conta com parceiros que desenham e sustentam a estrutura de governança.</div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Qual o maior risco?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>O principal risco está na execução integrada do modelo — garantir que espaço, cultura e operação funcionem de forma consistente. Para mitigar isso, o Celeiro conta com parceiros que desenham e sustentam a estrutura de governança.</p></div></div></div>
 
-  <div class="card">
-    <div class="card-q">Isso depende de uma única pessoa?</div>
-    <div class="card-a">Não. O Celeiro está sendo estruturado como sistema — com cultura definida, parceiros estratégicos e governança que sustentam sua continuidade independente de qualquer indivíduo.</div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Isso depende de uma única pessoa?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>Não. O Celeiro está sendo estruturado como sistema — com cultura definida, parceiros estratégicos e governança que sustentam sua continuidade independente de qualquer indivíduo.</p></div></div></div>
 
-  <div class="card">
-    <div class="card-q">Por que Indaiatuba? Por que agora?</div>
-    <div class="card-a">Indaiatuba concentra um perfil de empresários e líderes com potencial real para esse modelo — cidade em crescimento e com comunidade cristã ativa. O momento é agora porque o ecossistema de parceiros já está ativo e atuante, e organizações internacionais já olham para o Brasil como um celeiro de ideias e movimentos criativos. O Celeiro seria a concretização física de algo que já acontece.</div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Por que Indaiatuba? Por que agora?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>Indaiatuba concentra um perfil de empresários e líderes com potencial real para esse modelo — cidade em crescimento e com comunidade cristã ativa. O momento é agora porque o ecossistema de parceiros já está ativo e atuante, e organizações internacionais já olham para o Brasil como um celeiro de ideias e movimentos criativos. O Celeiro seria a concretização física de algo que já acontece.</p></div></div></div>
 
-  <div class="card">
-    <div class="card-q">Quem já está comprometido?</div>
-    <div class="card-a">O Celeiro já conta com organizações relevantes atuando no ecossistema — Envisionar (desenvolvimento de líderes e igrejas), C12 (formação de empresários cristãos), Global Leadership Summit (plataforma global de liderança) e Negócios Redentores (transformação de empresas com propósito). Não é uma ideia em fase inicial, mas a estruturação de algo que já existe.</div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Quem já está comprometido?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>O Celeiro já conta com organizações relevantes atuando no ecossistema — Envisionar (desenvolvimento de líderes e igrejas), C12 (formação de empresários cristãos), Global Leadership Summit (plataforma global de liderança) e Negócios Redentores (transformação de empresas com propósito). Não é uma ideia em fase inicial, mas a estruturação de algo que já existe.</p></div></div></div>
 
-  <div class="card">
-    <div class="card-q">Isso já foi testado?</div>
-    <div class="card-a">Sim. Os programas de formação de líderes cristãos em igrejas e empresas já são executados pela Envisionar em mais de 50 cidades no Brasil. Os parceiros não são promessas — são organizações ativas com histórico de entrega. O que estamos fazendo agora é construir a casa das iniciativas que já acontecem.</div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Isso já foi testado?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>Sim. Os programas de formação de líderes cristãos em igrejas e empresas já são executados pela Envisionar em mais de 50 cidades no Brasil. Os parceiros não são promessas — são organizações ativas com histórico de entrega. O que estamos fazendo agora é construir a casa das iniciativas que já acontecem.</p></div></div></div>
 
-  <div class="card">
-    <div class="card-q">Por que isso vai dar certo?</div>
-    <div class="card-a">Porque já existe demanda, parceiros e execução prévia. O Celeiro não parte de uma hipótese, mas da organização de um ecossistema real — liderado por pessoas com histórico comprovado de impacto.</div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Por que isso vai dar certo?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>Porque já existe demanda, parceiros e execução prévia. O Celeiro não parte de uma hipótese, mas da organização de um ecossistema real — liderado por pessoas com histórico comprovado de impacto.</p></div></div></div>
 
-  <div class="card">
-    <div class="card-q">Quem está à frente disso?</div>
-    <div class="card-a">
-      <div class="person-block">
-        <div class="person-name">Fábio Dudus</div>
-        Nos últimos 7 anos, iniciei como chair do C12 e depois de anos desenvolvendo líderes C-Levels e conectando organizações, percebo o real impacto de um local onde todos esses agentes e projetos, conectados, possam gerar impacto e transformação para as cidades. A ideia do Celeiro é real e seu potencial é abundante.
-      </div>
-      <div class="person-block">
-        <div class="person-name">Vinicius Trindade</div>
-        Nos últimos 7 anos, trabalhei na Envisionar desenvolvendo líderes e conectando organizações. O Celeiro não é uma ideia que tive — é a síntese do que aprendi fazendo. E faço isso porque acredito que quando negócios com propósito se unem eles têm o poder de transformar cidades.
-      </div>
-    </div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Quem está à frente disso?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a">
+    <div class="person"><div class="person-name">Fábio Dudus</div>Nos últimos 7 anos, iniciei como chair do C12 e depois de anos desenvolvendo líderes C-Levels e conectando organizações, percebo o real impacto de um local onde todos esses agentes e projetos, conectados, possam gerar impacto e transformação para as cidades. A ideia do Celeiro é real e seu potencial é abundante.</div>
+    <div class="person"><div class="person-name">Vinicius Trindade</div>Nos últimos 7 anos, trabalhei na Envisionar desenvolvendo líderes e conectando organizações. O Celeiro não é uma ideia que tive — é a síntese do que aprendi fazendo. E faço isso porque acredito que quando negócios com propósito se unem eles têm o poder de transformar cidades.</div>
+  </div></div></div>
 
-  <div class="card">
-    <div class="card-q">Por que entrar agora?</div>
-    <div class="card-a">Porque este é o momento de estruturar a base do modelo. Quem entra agora participa da construção, da narrativa e da expansão futura — com potencial de ver o Celeiro replicado em cidades estratégicas por todo o Brasil.</div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Por que entrar agora?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>Porque este é o momento de estruturar a base do modelo. Quem entra agora participa da construção, da narrativa e da expansão futura — com potencial de ver o Celeiro replicado em cidades estratégicas por todo o Brasil.</p></div></div></div>
 </section>
 
 <!-- NÚMEROS -->
 <section class="section" id="numeros">
-  <div class="section-eyebrow">Números</div>
+  <div class="eyebrow">Números</div>
   <h1>Investimento e retorno</h1>
 
   <div id="sub-fases" class="sec-label">Fases de investimento</div>
 
-  <div class="table-wrap">
-    <div class="fase-header">
-      <span class="fase-title">Fase 1 — Aquisição do terreno</span>
-      <span class="fase-total">R$ 1.200.000 – 2.000.000</span>
-    </div>
-    <table class="data-table" style="margin-top:12px;">
-      <tr><th>Item</th><th class="r">Estimativa</th></tr>
-      <tr><td>Terreno entre 4.000 e 8.000m² em Indaiatuba</td><td class="r">R$ 1.100.000 – 1.800.000</td></tr>
-      <tr><td>Assessoria jurídica, cartório e transferência</td><td class="r">R$ 60.000 – 120.000</td></tr>
-      <tr><td>Topografia e laudo técnico</td><td class="r">R$ 15.000 – 30.000</td></tr>
-      <tr><td>Regularização ambiental</td><td class="r">R$ 25.000 – 50.000</td></tr>
-    </table>
-  </div>
+  <div class="table-wrap"><div class="fase-header"><span class="fase-title">Fase 1 — Aquisição do terreno</span><span class="fase-total">R$ 1.200.000 – 2.000.000</span></div>
+  <table class="dt"><tr><th>Item</th><th class="r">Estimativa</th></tr><tr><td>Terreno entre 4.000 e 8.000m² em Indaiatuba</td><td class="r">R$ 1.100.000 – 1.800.000</td></tr><tr><td>Assessoria jurídica, cartório e transferência</td><td class="r">R$ 60.000 – 120.000</td></tr><tr><td>Topografia e laudo técnico</td><td class="r">R$ 15.000 – 30.000</td></tr><tr><td>Regularização ambiental</td><td class="r">R$ 25.000 – 50.000</td></tr></table></div>
 
-  <div class="table-wrap">
-    <div class="fase-header">
-      <span class="fase-title">Fase 2 — Projeto, licenças e infraestrutura</span>
-      <span class="fase-total">R$ 350.000 – 600.000</span>
-    </div>
-    <table class="data-table" style="margin-top:12px;">
-      <tr><th>Item</th><th class="r">Estimativa</th></tr>
-      <tr><td>Projeto arquitetônico (estilo celeiro americano) e complementares</td><td class="r">R$ 120.000 – 200.000</td></tr>
-      <tr><td>Projeto de interiores, paisagismo e área externa</td><td class="r">R$ 60.000 – 100.000</td></tr>
-      <tr><td>Licenças, alvarás e aprovações municipais</td><td class="r">R$ 40.000 – 80.000</td></tr>
-      <tr><td>Infraestrutura de acesso, terraplanagem e drenagem</td><td class="r">R$ 80.000 – 150.000</td></tr>
-      <tr><td>Infraestrutura elétrica e hidráulica inicial</td><td class="r">R$ 50.000 – 70.000</td></tr>
-    </table>
-  </div>
+  <div class="table-wrap"><div class="fase-header"><span class="fase-title">Fase 2 — Projeto, licenças e infraestrutura</span><span class="fase-total">R$ 350.000 – 600.000</span></div>
+  <table class="dt"><tr><th>Item</th><th class="r">Estimativa</th></tr><tr><td>Projeto arquitetônico (estilo celeiro americano)</td><td class="r">R$ 120.000 – 200.000</td></tr><tr><td>Projeto de interiores, paisagismo e área externa</td><td class="r">R$ 60.000 – 100.000</td></tr><tr><td>Licenças, alvarás e aprovações municipais</td><td class="r">R$ 40.000 – 80.000</td></tr><tr><td>Infraestrutura de acesso, terraplanagem e drenagem</td><td class="r">R$ 80.000 – 150.000</td></tr><tr><td>Infraestrutura elétrica e hidráulica inicial</td><td class="r">R$ 50.000 – 70.000</td></tr></table></div>
 
-  <div class="table-wrap">
-    <div class="fase-header">
-      <span class="fase-title">Fase 3 — Construção e acabamento</span>
-      <span class="fase-total">R$ 2.500.000 – 4.500.000</span>
-    </div>
-    <table class="data-table" style="margin-top:12px;">
-      <tr><th>Item</th><th class="r">Estimativa</th></tr>
-      <tr><td>Construção principal — coworking, salões, cafeteria</td><td class="r">R$ 1.600.000 – 2.800.000</td></tr>
-      <tr><td>Área externa — jardim, deck, pergolado, iluminação</td><td class="r">R$ 350.000 – 600.000</td></tr>
-      <tr><td>Estacionamento pavimentado (60–100 vagas)</td><td class="r">R$ 200.000 – 400.000</td></tr>
-      <tr><td>Acabamentos internos de alto padrão</td><td class="r">R$ 250.000 – 500.000</td></tr>
-      <tr><td>Fachada e identidade visual arquitetônica</td><td class="r">R$ 100.000 – 200.000</td></tr>
-    </table>
-  </div>
+  <div class="table-wrap"><div class="fase-header"><span class="fase-title">Fase 3 — Construção e acabamento</span><span class="fase-total">R$ 2.500.000 – 4.500.000</span></div>
+  <table class="dt"><tr><th>Item</th><th class="r">Estimativa</th></tr><tr><td>Construção principal — coworking, salões, cafeteria</td><td class="r">R$ 1.600.000 – 2.800.000</td></tr><tr><td>Área externa — jardim, deck, pergolado, iluminação</td><td class="r">R$ 350.000 – 600.000</td></tr><tr><td>Estacionamento pavimentado (60–100 vagas)</td><td class="r">R$ 200.000 – 400.000</td></tr><tr><td>Acabamentos internos de alto padrão</td><td class="r">R$ 250.000 – 500.000</td></tr><tr><td>Fachada e identidade visual arquitetônica</td><td class="r">R$ 100.000 – 200.000</td></tr></table></div>
 
-  <div class="table-wrap">
-    <div class="fase-header">
-      <span class="fase-title">Fase 4 — Equipamentos, mobiliário e primeiras operações</span>
-      <span class="fase-total">R$ 400.000 – 700.000</span>
-    </div>
-    <table class="data-table" style="margin-top:12px;">
-      <tr><th>Item</th><th class="r">Estimativa</th></tr>
-      <tr><td>Mobiliário coworking, salas e área de eventos</td><td class="r">R$ 150.000 – 250.000</td></tr>
-      <tr><td>Equipamentos de áudio, vídeo e tecnologia</td><td class="r">R$ 80.000 – 150.000</td></tr>
-      <tr><td>Estrutura da cafeteria</td><td class="r">R$ 60.000 – 100.000</td></tr>
-      <tr><td>Capital de giro — primeiros 6 meses</td><td class="r">R$ 80.000 – 150.000</td></tr>
-      <tr><td>Marketing de lançamento e primeiros eventos</td><td class="r">R$ 30.000 – 50.000</td></tr>
-    </table>
-  </div>
+  <div class="table-wrap"><div class="fase-header"><span class="fase-title">Fase 4 — Equipamentos, mobiliário e operações</span><span class="fase-total">R$ 400.000 – 700.000</span></div>
+  <table class="dt"><tr><th>Item</th><th class="r">Estimativa</th></tr><tr><td>Mobiliário coworking, salas e área de eventos</td><td class="r">R$ 150.000 – 250.000</td></tr><tr><td>Equipamentos de áudio, vídeo e tecnologia</td><td class="r">R$ 80.000 – 150.000</td></tr><tr><td>Estrutura da cafeteria</td><td class="r">R$ 60.000 – 100.000</td></tr><tr><td>Capital de giro — primeiros 6 meses</td><td class="r">R$ 80.000 – 150.000</td></tr><tr><td>Marketing de lançamento e primeiros eventos</td><td class="r">R$ 30.000 – 50.000</td></tr></table></div>
 
-  <div class="total-row">
-    <span class="total-label">Investimento total estimado</span>
-    <span class="total-value">R$ 4,4M – 7,8M</span>
-  </div>
+  <div class="total-row"><span class="total-label">Investimento total estimado</span><span class="total-value">R$ 4,4M – 7,8M</span></div>
 
-  <div class="timeline-grid">
+  <div class="tl-grid">
     <div class="tl-card"><p class="tl-num">Fase 1</p><p class="tl-name">Aquisição do terreno</p><p class="tl-dur">1 – 3 meses</p></div>
     <div class="tl-card"><p class="tl-num">Fase 2</p><p class="tl-name">Projeto e licenças</p><p class="tl-dur">4 – 8 meses</p></div>
     <div class="tl-card"><p class="tl-num">Fase 3</p><p class="tl-name">Construção</p><p class="tl-dur">12 – 18 meses</p></div>
@@ -939,39 +392,15 @@
   <div id="sub-receitas" class="sec-label">Projeção de receitas</div>
 
   <div class="metric-row">
-    <div class="metric">
-      <div class="metric-label">Investimento total (médio)</div>
-      <div class="metric-value">R$ 6,1M</div>
-      <div class="metric-sub">Cenário médio das 4 fases</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">Receita bruta acumulada (3 anos)</div>
-      <div class="metric-value">R$ 9,8M</div>
-      <div class="metric-sub">Soma Ano 1 + 2 + 3</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">Líquido acumulado (3 anos)</div>
-      <div class="metric-value">R$ 5,4M</div>
-      <div class="metric-sub">Após custos operacionais</div>
-    </div>
+    <div class="metric"><div class="metric-label">Investimento total (médio)</div><div class="metric-value">R$ 6,1M</div><div class="metric-sub">Cenário médio das 4 fases</div></div>
+    <div class="metric"><div class="metric-label">Receita bruta acumulada (3 anos)</div><div class="metric-value">R$ 9,8M</div><div class="metric-sub">Soma Ano 1 + 2 + 3</div></div>
+    <div class="metric"><div class="metric-label">Líquido acumulado (3 anos)</div><div class="metric-value">R$ 5,4M</div><div class="metric-sub">Após custos operacionais</div></div>
   </div>
 
   <div class="year-grid">
-    <div class="year-card">
-      <div class="year-label">Ano 1 — ramp-up</div>
-      <div class="year-value">R$ 2,23M</div>
-      <div class="year-desc">50% coworking · 2 eventos/mês · capacitações em estruturação</div>
-    </div>
-    <div class="year-card">
-      <div class="year-label">Ano 2 — consolidação</div>
-      <div class="year-value">R$ 3,30M</div>
-      <div class="year-desc">70% coworking · 4 eventos/mês · capacitações plenas</div>
-    </div>
-    <div class="year-card hl">
-      <div class="year-label">Ano 3 — maturidade</div>
-      <div class="year-value">R$ 4,32M</div>
-      <div class="year-desc">85% coworking · 6 eventos/mês · enterprise consolidado</div>
-    </div>
+    <div class="year-card"><div class="year-label">Ano 1 — ramp-up</div><div class="year-value">R$ 2,23M</div><div class="year-desc">50% coworking · 2 eventos/mês · capacitações em estruturação</div></div>
+    <div class="year-card"><div class="year-label">Ano 2 — consolidação</div><div class="year-value">R$ 3,30M</div><div class="year-desc">70% coworking · 4 eventos/mês · capacitações plenas</div></div>
+    <div class="year-card hl"><div class="year-label">Ano 3 — maturidade</div><div class="year-value">R$ 4,32M</div><div class="year-desc">85% coworking · 6 eventos/mês · enterprise consolidado</div></div>
   </div>
 
   <div class="legend">
@@ -979,275 +408,212 @@
     <span class="legend-item"><span class="legend-box" style="background:#4A7C28"></span>Receita bruta</span>
     <span class="legend-item"><span class="legend-box" style="background:#C8DFB0"></span>Resultado líquido</span>
   </div>
-  <div class="chart-container">
-    <canvas id="retornoChart"></canvas>
-  </div>
+  <div class="chart-wrap"><canvas id="chart1"></canvas></div>
 
   <div class="table-wrap">
-    <table class="data-table">
-      <tr>
-        <th>Frente de receita</th>
-        <th class="r">Ano 1</th>
-        <th class="r">Ano 2</th>
-        <th class="r">Ano 3</th>
-      </tr>
+    <table class="dt">
+      <tr><th>Frente de receita</th><th class="r">Ano 1</th><th class="r">Ano 2</th><th class="r">Ano 3</th></tr>
       <tr><td>Coworking (assinaturas)</td><td class="r">R$ 1.157.000</td><td class="r">R$ 1.680.000</td><td class="r">R$ 2.100.000</td></tr>
       <tr><td>Serviços adicionais e capacitações</td><td class="r">R$ 588.000</td><td class="r">R$ 780.000</td><td class="r">R$ 1.020.000</td></tr>
       <tr><td>Área externa (eventos e celebrações)</td><td class="r">R$ 314.400</td><td class="r">R$ 628.800</td><td class="r">R$ 943.200</td></tr>
       <tr><td>Cafeteria e produtos</td><td class="r">R$ 168.000</td><td class="r">R$ 210.000</td><td class="r">R$ 252.000</td></tr>
-      <tr class="subtotal"><td>Receita bruta total</td><td class="r">R$ 2.227.400</td><td class="r">R$ 3.298.800</td><td class="r">R$ 4.315.200</td></tr>
-      <tr><td style="color:var(--text3); font-size:11px;">Custos operacionais (45%)</td><td class="r" style="color:var(--text3); font-size:11px;">— R$ 1.002.000</td><td class="r" style="color:var(--text3); font-size:11px;">— R$ 1.484.000</td><td class="r" style="color:var(--text3); font-size:11px;">— R$ 1.942.000</td></tr>
-      <tr class="subtotal"><td>Resultado operacional líquido</td><td class="r">R$ 1.225.000</td><td class="r">R$ 1.815.000</td><td class="r">R$ 2.373.000</td></tr>
+      <tr class="sub"><td>Receita bruta total</td><td class="r">R$ 2.227.400</td><td class="r">R$ 3.298.800</td><td class="r">R$ 4.315.200</td></tr>
+      <tr><td style="font-size:11px;color:#9C9A93">Custos operacionais (45%)</td><td class="r" style="font-size:11px;color:#9C9A93">— R$ 1.002.000</td><td class="r" style="font-size:11px;color:#9C9A93">— R$ 1.484.000</td><td class="r" style="font-size:11px;color:#9C9A93">— R$ 1.942.000</td></tr>
+      <tr class="sub"><td>Resultado operacional líquido</td><td class="r">R$ 1.225.000</td><td class="r">R$ 1.815.000</td><td class="r">R$ 2.373.000</td></tr>
     </table>
   </div>
 
-  <div id="sub-ecossistema" class="sec-label">Ecossistema — o Celeiro 1 financia o Celeiro 2</div>
+  <div id="sub-eco" class="sec-label">Ecossistema — o Celeiro 1 financia o Celeiro 2</div>
 
   <div class="flow-grid">
-    <div class="flow-card">
-      <div class="flow-year">Ano 1</div>
-      <div class="flow-title">Ramp-up e consolidação</div>
-      <div class="flow-body">Celeiro 1 em operação. Receita crescendo. Resultado líquido reinvestido na reserva de expansão.</div>
-      <div class="flow-value">+ R$ 1,22M líquido</div>
-    </div>
-    <div class="flow-card">
-      <div class="flow-year">Ano 2</div>
-      <div class="flow-title">Maturidade e reserva</div>
-      <div class="flow-body">Ocupação em 70%. Reserva acumulada chega a R$ 3M. Suficiente para adquirir terreno e iniciar projeto do Celeiro 2.</div>
-      <div class="flow-value">+ R$ 1,81M líquido</div>
-    </div>
-    <div class="flow-card hl">
-      <div class="flow-year">Ano 3</div>
-      <div class="flow-title">Celeiro 2 começa</div>
-      <div class="flow-body">Reserva acumulada de R$ 5,4M cobre Fase 1 e Fase 2 do Celeiro 2 — terreno e projeto. Operação autônoma.</div>
-      <div class="flow-value">+ R$ 2,37M líquido</div>
-    </div>
+    <div class="flow-card"><div class="flow-year">Ano 1</div><div class="flow-title">Ramp-up e consolidação</div><div class="flow-body">Celeiro 1 em operação. Receita crescendo. Resultado líquido reinvestido na reserva de expansão.</div><div class="flow-value">+ R$ 1,22M líquido</div></div>
+    <div class="flow-card"><div class="flow-year">Ano 2</div><div class="flow-title">Maturidade e reserva</div><div class="flow-body">Ocupação em 70%. Reserva acumulada chega a R$ 3M. Suficiente para adquirir terreno e iniciar projeto do Celeiro 2.</div><div class="flow-value">+ R$ 1,81M líquido</div></div>
+    <div class="flow-card hl"><div class="flow-year">Ano 3</div><div class="flow-title">Celeiro 2 começa</div><div class="flow-body">Reserva acumulada de R$ 5,4M cobre Fase 1 e Fase 2 do Celeiro 2 — terreno e projeto. Operação autônoma.</div><div class="flow-value">+ R$ 2,37M líquido</div></div>
   </div>
 
   <div class="eco-box">
     <div class="eco-title">Celeiro 2 — financiado pelo Celeiro 1</div>
     <div class="eco-body">Com R$ 5,4M líquidos acumulados em 3 anos, o Celeiro 1 cobre integralmente a aquisição do terreno e o projeto e licenças do Celeiro 2 — e ainda mantém reserva operacional. A construção do Celeiro 2 pode ser financiada pelo fluxo contínuo do Celeiro 1 a partir do Ano 4, sem necessidade de novo investidor externo. O modelo se torna autorreplicante. Cada Celeiro planta o próximo.</div>
   </div>
-
-  <p class="obs" style="margin-top:24px;">Valores estimados com base no mercado de Indaiatuba e região (2025). Sujeitos a revisão após planejamento financeiro formal. A captação pode ser estruturada por fases, permitindo entrada escalonada dos investidores.</p>
+  <p class="obs">Valores estimados com base no mercado de Indaiatuba e região (2025). Sujeitos a revisão após planejamento financeiro formal.</p>
 </section>
 
 <!-- COMPARATIVO -->
 <section class="section" id="comparativo">
-  <div class="section-eyebrow">Comparativo</div>
+  <div class="eyebrow">Comparativo</div>
   <h1>Celeiro vs WeWork</h1>
-  <p class="lead" style="margin-bottom:32px;">A WeWork vendeu a ilusão de comunidade. O Celeiro nasce de uma comunidade real.</p>
+
+  <div class="compare-intro">
+    <p>A WeWork é a maior referência global em espaços de trabalho compartilhado — e também o maior estudo de caso sobre o que não fazer quando se escala um modelo sem fundação sólida. Comparar o Celeiro com a WeWork não é arrogância. É clareza estratégica.</p>
+    <p>A visão do Celeiro é de expansão. Queremos estar em cada cidade estratégica do Brasil, tal como a WeWork queria estar em cada cidade do mundo. A diferença está no ritmo e no propósito: onde a WeWork correu para crescer e lucrar, o Celeiro cresce devagar para durar e transformar. Cada nova unidade só nasce quando a anterior está sólida — cultural, financeira e espiritualmente.</p>
+    <p>A WeWork construiu um império sobre aluguel. O Celeiro constrói sobre pertencimento. Um dependia de investidores para sobreviver. O outro foi desenhado para se autofinanciar. Um vendia a ilusão de comunidade. O outro já tem a comunidade antes de ter o espaço.</p>
+  </div>
 
   <div class="compare-wrap">
-    <div class="compare-header">
-      <div class="compare-header-blank"></div>
-      <div class="compare-header-wework">WeWork</div>
-      <div class="compare-header-celeiro">Celeiro</div>
-    </div>
-
-    <div class="compare-row hl">
-      <div class="compare-label">Validação prévia</div>
-      <div class="compare-wework">Nasceu como hipótese. A comunidade precisava ser construída do zero junto com o espaço.<br><span class="tag-bad">modelo não testado</span></div>
-      <div class="compare-celeiro">Já existe uma rede ativa de igrejas e empresas operando antes do espaço físico. O Celeiro é a casa de uma operação que já acontece.<br><span class="tag-strong">demanda validada</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Propriedade do imóvel</div>
-      <div class="compare-wework">Aluga com contratos de 10–15 anos.<br><span class="tag-bad">passivo fixo gigante</span></div>
-      <div class="compare-celeiro">Constrói e possui o ativo. Sem risco de despejo.<br><span class="tag-good">ativo real</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Modelo de receita</div>
-      <div class="compare-wework">Assinaturas de coworking. Uma única frente.<br><span class="tag-bad">vulnerável a queda de ocupação</span></div>
-      <div class="compare-celeiro">Coworking + capacitações + eventos + cafeteria + área externa.<br><span class="tag-good">diversificado, 7 dias</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Estrutura de custos</div>
-      <div class="compare-wework">Aluguel + reforma + operação independente da ocupação.<br><span class="tag-bad">break-even distante</span></div>
-      <div class="compare-celeiro">Sem aluguel. Custos fixos controlados desde o início.<br><span class="tag-good">break-even previsível</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Proposta de valor</div>
-      <div class="compare-wework">Espaço bonito e flexível. Facilmente substituível.<br><span class="tag-bad">sem retenção profunda</span></div>
-      <div class="compare-celeiro">Pertencimento a ecossistema de propósito. Formação e impacto.<br><span class="tag-good">custo de saída emocional alto</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Retenção de membros</div>
-      <div class="compare-wework">Baseada em preço. Home office eliminou o diferencial.<br><span class="tag-bad">churn alto em crises</span></div>
-      <div class="compare-celeiro">Baseada em comunidade, propósito e formação.<br><span class="tag-good">retenção por vínculo</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Modelo de expansão</div>
-      <div class="compare-wework">Cada nova unidade dependia de novo investidor externo.<br><span class="tag-bad">capital externo contínuo</span></div>
-      <div class="compare-celeiro">O Celeiro 1 financia o Celeiro 2. Autorreplicante a partir do Ano 3.<br><span class="tag-good">expansão autônoma</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Velocidade de expansão</div>
-      <div class="compare-wework">800+ locais em 120 cidades em menos de 10 anos.<br><span class="tag-bad">cultura diluída</span></div>
-      <div class="compare-celeiro">Curada e intencional. Uma cidade estratégica por vez.<br><span class="tag-good">identidade preservada</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Propósito e cultura</div>
-      <div class="compare-wework">Marketing de propósito. Comunidade como slogan.<br><span class="tag-bad">propósito como produto</span></div>
-      <div class="compare-celeiro">Fé, generosidade e liderança servidora no DNA.<br><span class="tag-good">missão que precede o negócio</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Dependência de tendências</div>
-      <div class="compare-wework">Dependeu do boom de startups. Pandemia destruiu a tese.<br><span class="tag-bad">modelo frágil</span></div>
-      <div class="compare-celeiro">Serve demanda perene: líderes que integram fé, trabalho e impacto.<br><span class="tag-good">demanda estrutural</span></div>
-    </div>
-
-    <div class="compare-row">
-      <div class="compare-label">Governança</div>
-      <div class="compare-wework">Concentrada no fundador. Decisões unilaterais e opacas.<br><span class="tag-bad">risco de pessoa-chave máximo</span></div>
-      <div class="compare-celeiro">Sistema com parceiros estratégicos e governança distribuída.<br><span class="tag-good">não depende de uma pessoa</span></div>
-    </div>
+    <div class="compare-header"><div class="ch-blank"></div><div class="ch-wework">WeWork</div><div class="ch-celeiro">Celeiro</div></div>
+    <div class="compare-row hl"><div class="cr-label">Validação prévia</div><div class="cr-wework">Nasceu como hipótese. A comunidade precisava ser construída do zero.<br><span class="tag-bad">modelo não testado</span></div><div class="cr-celeiro">Rede ativa de igrejas e empresas já opera antes do espaço físico existir.<br><span class="tag-strong">demanda validada</span></div></div>
+    <div class="compare-row"><div class="cr-label">Propriedade do imóvel</div><div class="cr-wework">Aluga com contratos de 10–15 anos.<br><span class="tag-bad">passivo fixo gigante</span></div><div class="cr-celeiro">Constrói e possui o ativo. Sem risco de despejo.<br><span class="tag-good">ativo real</span></div></div>
+    <div class="compare-row"><div class="cr-label">Modelo de receita</div><div class="cr-wework">Assinaturas de coworking. Uma única frente.<br><span class="tag-bad">vulnerável à queda de ocupação</span></div><div class="cr-celeiro">Coworking + capacitações + eventos + cafeteria + área externa.<br><span class="tag-good">diversificado, 7 dias</span></div></div>
+    <div class="compare-row"><div class="cr-label">Estrutura de custos</div><div class="cr-wework">Aluguel + reforma + operação independente da ocupação.<br><span class="tag-bad">break-even distante</span></div><div class="cr-celeiro">Sem aluguel. Custos fixos controlados desde o início.<br><span class="tag-good">break-even previsível</span></div></div>
+    <div class="compare-row"><div class="cr-label">Proposta de valor</div><div class="cr-wework">Espaço bonito e flexível. Facilmente substituível.<br><span class="tag-bad">sem retenção profunda</span></div><div class="cr-celeiro">Pertencimento a ecossistema de propósito. Formação e impacto.<br><span class="tag-good">custo de saída emocional alto</span></div></div>
+    <div class="compare-row"><div class="cr-label">Modelo de expansão</div><div class="cr-wework">Cada nova unidade dependia de novo investidor externo.<br><span class="tag-bad">capital externo contínuo</span></div><div class="cr-celeiro">O Celeiro 1 financia o Celeiro 2. Autorreplicante a partir do Ano 3.<br><span class="tag-good">expansão autônoma</span></div></div>
+    <div class="compare-row"><div class="cr-label">Velocidade de expansão</div><div class="cr-wework">800+ locais em 120 cidades em menos de 10 anos.<br><span class="tag-bad">cultura diluída</span></div><div class="cr-celeiro">Curada e intencional. Uma cidade estratégica por vez.<br><span class="tag-good">identidade preservada</span></div></div>
+    <div class="compare-row"><div class="cr-label">Propósito e cultura</div><div class="cr-wework">Marketing de propósito. Comunidade como slogan.<br><span class="tag-bad">propósito como produto</span></div><div class="cr-celeiro">Fé, generosidade e liderança servidora no DNA.<br><span class="tag-good">missão que precede o negócio</span></div></div>
+    <div class="compare-row"><div class="cr-label">Dependência de tendências</div><div class="cr-wework">Dependeu do boom de startups. Pandemia destruiu a tese.<br><span class="tag-bad">modelo frágil</span></div><div class="cr-celeiro">Serve demanda perene: líderes que integram fé, trabalho e impacto.<br><span class="tag-good">demanda estrutural</span></div></div>
+    <div class="compare-row"><div class="cr-label">Governança</div><div class="cr-wework">Concentrada no fundador. Decisões unilaterais e opacas.<br><span class="tag-bad">risco de pessoa-chave máximo</span></div><div class="cr-celeiro">Sistema com parceiros estratégicos e governança distribuída.<br><span class="tag-good">não depende de uma pessoa</span></div></div>
   </div>
 
   <div class="verdict-grid">
-    <div class="verdict-card verdict-wework">
-      <div class="verdict-title">Por que a WeWork quebrou</div>
-      <div class="verdict-body">Construiu um passivo imobiliário de US$ 47 bilhões apostando que a ocupação nunca cairia. Quando caiu, não havia reserva, não havia diversificação e não havia comunidade real para segurar os membros. Era arbitragem imobiliária vestida de empresa de tecnologia.</div>
-    </div>
-    <div class="verdict-card verdict-celeiro">
-      <div class="verdict-title">Por que o Celeiro pode durar</div>
-      <div class="verdict-body">Possui o ativo, diversifica a receita e serve uma comunidade que já existe antes do espaço. O que a WeWork fingiu ser — uma comunidade com missão — o Celeiro já é. O espaço físico não cria a comunidade. Ele a abriga.</div>
-    </div>
+    <div class="verdict-card verdict-wework"><div class="verdict-title">Por que a WeWork quebrou</div><div class="verdict-body">Construiu um passivo imobiliário de US$ 47 bilhões apostando que a ocupação nunca cairia. Quando caiu, não havia reserva, não havia diversificação e não havia comunidade real para segurar os membros. Era arbitragem imobiliária vestida de empresa de tecnologia.</div></div>
+    <div class="verdict-card verdict-celeiro"><div class="verdict-title">Por que o Celeiro pode durar</div><div class="verdict-body">Possui o ativo, diversifica a receita e serve uma comunidade que já existe antes do espaço. O que a WeWork fingiu ser — uma comunidade com missão — o Celeiro já é. O espaço físico não cria a comunidade. Ele a abriga.</div></div>
   </div>
 </section>
 
 <!-- IMAGINE -->
 <section class="section" id="imagine">
-  <div class="section-eyebrow">Imagine</div>
+  <div class="eyebrow">Imagine</div>
   <h1>O lugar que vai existir</h1>
-  <p class="imagine-intro">Um celeiro americano no coração de Indaiatuba. Madeira, luz natural, jardim verde. Um lugar onde você chega para trabalhar e fica por causa das pessoas.</p>
+  <p class="lead" style="margin-bottom:36px;">Um celeiro americano no coração de Indaiatuba. Madeira, luz natural, jardim verde. Um lugar onde você chega para trabalhar e fica por causa das pessoas.</p>
 
-  <div class="gallery-section">
-    <div class="gallery-title">Arquitetura e espaço externo</div>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="13" rx="1"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-        <div class="gallery-placeholder">Fachada estilo<br>celeiro americano</div>
-      </div>
-      <div class="gallery-item">
-        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-        <div class="gallery-placeholder">Área externa<br>e jardim verde</div>
-      </div>
-      <div class="gallery-item">
-        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-        <div class="gallery-placeholder">Estacionamento<br>e acesso</div>
-      </div>
-    </div>
+  <div class="sec-label">Arquitetura e espaço externo</div>
+  <div class="imagine-grid">
+    <div class="img-slot" id="img1"><input type="file" accept="image/*" onchange="loadImg(this,'img1')"><svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="img-slot-label">Fachada estilo<br>celeiro americano</div></div>
+    <div class="img-slot" id="img2"><input type="file" accept="image/*" onchange="loadImg(this,'img2')"><svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="img-slot-label">Área externa<br>e jardim verde</div></div>
+    <div class="img-slot" id="img3"><input type="file" accept="image/*" onchange="loadImg(this,'img3')"><svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="img-slot-label">Vista aérea<br>e estacionamento</div></div>
   </div>
 
-  <div class="gallery-section">
-    <div class="gallery-title">Espaços internos — coworking e formação</div>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8m-4-4v4"/></svg>
-        <div class="gallery-placeholder">Área de coworking<br>aberta</div>
-      </div>
-      <div class="gallery-item">
-        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75"/></svg>
-        <div class="gallery-placeholder">Salas de reunião<br>e mentoria</div>
-      </div>
-      <div class="gallery-item">
-        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        <div class="gallery-placeholder">Auditório e espaço<br>de capacitação</div>
-      </div>
-    </div>
+  <div class="sec-label">Espaços internos</div>
+  <div class="imagine-grid">
+    <div class="img-slot" id="img4"><input type="file" accept="image/*" onchange="loadImg(this,'img4')"><svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="img-slot-label">Área de coworking<br>aberta</div></div>
+    <div class="img-slot" id="img5"><input type="file" accept="image/*" onchange="loadImg(this,'img5')"><svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="img-slot-label">Salas de reunião<br>e mentoria</div></div>
+    <div class="img-slot" id="img6"><input type="file" accept="image/*" onchange="loadImg(this,'img6')"><svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="img-slot-label">Auditório e<br>capacitações</div></div>
   </div>
 
-  <div class="gallery-section">
-    <div class="gallery-title">Área externa — eventos e celebrações</div>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        <div class="gallery-placeholder">Cerimônia de<br>casamento</div>
-      </div>
-      <div class="gallery-item">
-        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <div class="gallery-placeholder">Jantar estratégico<br>e eventos noturnos</div>
-      </div>
-      <div class="gallery-item">
-        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="1"/></svg>
-        <div class="gallery-placeholder">Ensaios fotográficos<br>pré-wedding</div>
-      </div>
-    </div>
+  <div class="sec-label">Área externa — eventos e celebrações</div>
+  <div class="imagine-grid">
+    <div class="img-slot" id="img7"><input type="file" accept="image/*" onchange="loadImg(this,'img7')"><svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="img-slot-label">Cerimônia de<br>casamento</div></div>
+    <div class="img-slot" id="img8"><input type="file" accept="image/*" onchange="loadImg(this,'img8')"><svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="img-slot-label">Jantar estratégico<br>noturno</div></div>
+    <div class="img-slot" id="img9"><input type="file" accept="image/*" onchange="loadImg(this,'img9')"><svg class="upload-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div class="img-slot-label">Ensaios<br>pré-wedding</div></div>
+  </div>
+</section>
+
+<!-- FUTURO -->
+<section class="section" id="futuro">
+  <div class="eyebrow">Futuro</div>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:32px;font-style:italic;">O que se segue é uma projeção imaginativa do que o Celeiro pode se tornar. Um exercício de visão — escrito no presente, para ser lido no futuro.</p>
+
+  <div class="article-meta">
+    <span class="article-source">Forbes Brasil</span>
+    <span class="article-date">14 de março de 2030</span>
+    <span class="article-tag">Negócios com Propósito</span>
   </div>
 
-  <div style="background: var(--bg2); border-radius: 12px; padding: 24px 28px; margin-top: 8px; border: 1px solid var(--border2);">
-    <p style="font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: var(--text); line-height: 1.7; margin: 0;">
-      "Adicione aqui fotos de referência — celeiros americanos reformados, coworkings com madeira e luz natural, jardins para eventos. O investidor precisa ver o lugar antes de ele existir."
-    </p>
+  <h1 class="article-headline">A cidade que virou celeiro: como Indaiatuba se tornou referência global em inovação e generosidade</h1>
+  <p class="article-subhead">O que começou como um hub de coworking numa cidade do interior paulista hoje inspira líderes em 40 países e foi apresentado como caso de estudo no Global Leadership Summit em Chicago.</p>
+  <p class="article-byline">Por Beatriz Cavalcante · Edição impressa Forbes Brasil, março de 2030</p>
+
+  <hr class="article-divider">
+
+  <div class="article-body">
+    <p>Quando Vinicius Trindade e Fábio Dudus compraram um terreno às margens de uma das principais avenidas de Indaiatuba, em 2025, a ideia parecia simples demais para ser revolucionária: construir um celeiro americano no interior do Brasil e transformá-lo num espaço de trabalho com propósito. Cinco anos depois, o Celeiro é considerado um dos experimentos mais bem-sucedidos de desenvolvimento urbano orientado por valores cristãos no mundo.</p>
+
+    <p>"A gente não queria criar uma empresa. A gente queria criar um ambiente", diz Trindade, hoje à frente de uma rede com seis unidades em operação e outras quatro em construção. "O espaço físico sempre foi só o começo."</p>
+
+    <div class="article-pullquote">"O espaço físico sempre foi só o começo. O que a gente queria mesmo era dar um endereço para o que já existia."</div>
+
+    <h3>O que é uma Cidade Celeiro</h3>
+    <p>O conceito de Cidade Celeiro nasceu da expansão natural do modelo. Quando o primeiro Celeiro de Indaiatuba completou três anos de operação e gerou superávit suficiente para financiar uma segunda unidade sem investidor externo, ficou claro que o modelo era replicável — e que cada cidade que recebesse um Celeiro poderia se tornar um polo de líderes formados, negócios conectados e impacto social mensurável.</p>
+    <p>Hoje, uma Cidade Celeiro é aquela que recebe o empreendimento físico e passa por um processo de certificação que envolve formação de líderes locais, conexão com a rede Envisionar e C12, e comprometimento com ao menos uma iniciativa de impacto social anual. O selo não é apenas simbólico — ele ativa uma rede de benefícios reais para os empresários da cidade.</p>
+
+    <h3>Como surgiu</h3>
+    <p>A história começa antes do espaço físico. Trindade e Dudus já operavam, respectivamente, a Envisionar e o C12 — duas organizações com décadas de atuação no desenvolvimento de líderes cristãos em igrejas e empresas. A parceria entre os dois acumulava eventos, programas e conexões estratégicas que aconteciam em espaços alugados, igrejas e escritórios improvisados.</p>
+    <p>"A gente percebia que tinha um ecossistema real acontecendo, mas sem casa", lembra Dudus. "Todo mundo se encontrava, mas em lugares que não tinham a nossa cara. A ideia do Celeiro foi simples: construir a casa do que já existia."</p>
+
+    <h3>O propósito que move tudo</h3>
+    <p>Diferente de outros hubs de inovação, o Celeiro não nasceu da lógica de startups ou de capital de risco. Nasceu da teologia da abundância — da crença de que negócios alinhados com valores do reino de Deus têm o poder de transformar cidades, não apenas gerar lucro.</p>
+    <p>Essa premissa moldou cada decisão do modelo: a arquitetura rústica e acolhedora que remete a um celeiro americano, a cafeteria aberta à comunidade, os programas de formação de liderança acessíveis, os eventos culturais em parceria com a prefeitura, os casamentos realizados nos finais de semana na área externa. Cada frente de receita foi desenhada para ser, ao mesmo tempo, financeiramente sustentável e culturalmente coerente com o propósito.</p>
+
+    <h3>O que acontece lá</h3>
+    <p>Numa segunda-feira típica no Celeiro de Indaiatuba, o espaço recebe entre 60 e 80 profissionais. Nos escritórios privativos, empresas de tecnologia, consultorias e startups de impacto. Nas salas de reunião, rodadas de mentoria e imersões de liderança. Na cafeteria, conversas que misturam estratégia empresarial e propósito de vida.</p>
+    <p>Às quartas-feiras, o auditório recebe o programa semanal de capacitação — uma trilha de liderança que já formou mais de 800 executivos desde a inauguração. Nos fins de semana, a área externa se transforma: casamentos, ensaios fotográficos, jantares estratégicos e eventos culturais. O Celeiro nunca para.</p>
+
+    <h3>O modelo de negócio que se autofinancia</h3>
+    <p>Um dos aspectos mais estudados do Celeiro é sua estrutura financeira. Ao contrário da WeWork — que alugava imóveis com contratos longos e entrou em colapso quando a ocupação caiu — o Celeiro constrói e possui seus ativos. Sem aluguel para pagar, os custos fixos são previsíveis e o break-even, alcançável.</p>
+    <p>A diversificação de receita — coworking, capacitações, eventos, cafeteria e área externa — garante que o modelo gere caixa sete dias por semana, independente da taxa de ocupação do coworking. O resultado: o primeiro Celeiro atingiu superávit no terceiro ano de operação e financiou integralmente a construção do segundo, em Campinas, sem precisar de novo investidor.</p>
+
+    <h3>A inspiração que chegou ao mundo</h3>
+    <p>Em agosto de 2029, Vinicius Trindade subiu ao palco do Global Leadership Summit em Chicago para apresentar o modelo Celeiro a uma audiência de mais de 12 mil líderes de 115 países. A apresentação, que durou 18 minutos, foi uma das mais compartilhadas na história do evento.</p>
+    <p>"O que impressionou não foi o número de unidades ou a receita", diz Stuart Hastings, diretor de conteúdo do GLS. "Foi a coerência entre o que eles pregavam e o que eles construíram. Era um modelo que servia ao lucro servindo às pessoas."</p>
+    <p>Desde então, líderes de Portugal, Moçambique, Angola e Estados Unidos entraram em contato para replicar o modelo em suas cidades. A equipe do Celeiro estuda como expandir internacionalmente sem perder o que tornou o modelo único: a lentidão intencional, a curadoria cultural e o propósito que precede o negócio.</p>
+
+    <div class="article-pullquote">"Queríamos provar que é possível construir algo belo, sustentável e generoso ao mesmo tempo. Acho que provamos."<br><span style="font-size:13px;font-style:normal;">— Vinicius Trindade, cofundador do Celeiro</span></div>
+
+    <p>Indaiatuba, que em 2025 era conhecida principalmente como cidade-dormitório da região de Campinas, hoje é identificada como a primeira Cidade Celeiro do Brasil — e o ponto de partida de um movimento que ainda está no começo.</p>
   </div>
 </section>
 
 </main>
 
 <script>
-function showSection(id, el) {
+function show(id, el) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if (el) el.classList.add('active');
-  if (id === 'numeros') {
-    setTimeout(initChart, 100);
-  }
+  if (id === 'numeros') setTimeout(initChart, 80);
+  window.scrollTo(0, 0);
 }
 
-function scrollTo(id) {
+function goTo(id) {
   setTimeout(() => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 150);
+  }, 160);
 }
 
-let chartInit = false;
+function toggleFaq(header) {
+  const card = header.parentElement;
+  const isOpen = card.classList.contains('open');
+  card.classList.toggle('open', !isOpen);
+}
+
+function loadImg(input, slotId) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const slot = document.getElementById(slotId);
+    let img = slot.querySelector('img');
+    if (!img) { img = document.createElement('img'); slot.appendChild(img); }
+    img.src = e.target.result;
+    slot.querySelector('.img-slot-label, .photo-slot-label') && (slot.querySelector('.img-slot-label, .photo-slot-label').style.display = 'none');
+    slot.querySelector('svg') && (slot.querySelector('svg').style.display = 'none');
+  };
+  reader.readAsDataURL(file);
+}
+
+let chartDone = false;
 function initChart() {
-  if (chartInit) return;
-  chartInit = true;
-  const ctx = document.getElementById('retornoChart');
-  if (!ctx) return;
-  new Chart(ctx, {
+  if (chartDone) return;
+  const el = document.getElementById('chart1');
+  if (!el) return;
+  chartDone = true;
+  new Chart(el, {
     type: 'bar',
     data: {
       labels: ['Investimento inicial', 'Ano 1', 'Ano 2', 'Ano 3'],
       datasets: [
-        { label: 'Investimento', data: [6100, 0, 0, 0], backgroundColor: '#2D5016', borderRadius: 4 },
-        { label: 'Receita bruta', data: [0, 2227, 3299, 4315], backgroundColor: '#4A7C28', borderRadius: 4 },
-        { label: 'Resultado líquido', data: [0, 1225, 1815, 2373], backgroundColor: '#C8DFB0', borderRadius: 4 }
+        { label: 'Investimento', data: [6100,0,0,0], backgroundColor: '#2D5016', borderRadius: 4 },
+        { label: 'Receita bruta', data: [0,2227,3299,4315], backgroundColor: '#4A7C28', borderRadius: 4 },
+        { label: 'Resultado líquido', data: [0,1225,1815,2373], backgroundColor: '#C8DFB0', borderRadius: 4 }
       ]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (c) => {
-              if (c.parsed.y === 0) return null;
-              return c.dataset.label + ': R$ ' + (c.parsed.y / 1000).toFixed(2) + 'M';
-            }
-          }
-        }
-      },
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y ? c.dataset.label+': R$ '+(c.parsed.y/1000).toFixed(2)+'M' : null } } },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 12 }, color: '#9C9A93' } },
-        y: {
-          grid: { color: 'rgba(28,27,24,0.06)' },
-          ticks: { font: { size: 11 }, color: '#9C9A93', callback: v => 'R$ ' + (v/1000).toFixed(0) + 'M' },
-          max: 7000
-        }
+        x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#9C9A93' } },
+        y: { grid: { color: 'rgba(28,27,24,0.05)' }, ticks: { font: { size: 11 }, color: '#9C9A93', callback: v => 'R$ '+(v/1000).toFixed(0)+'M' }, max: 7000 }
       }
     }
   });
