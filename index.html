@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>O Celeiro — Proposta de Investimento</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 :root {
@@ -15,49 +15,31 @@
   --accent-light: #EBF2E3; --accent-mid: #C8DFB0;
   --border: rgba(28,27,24,0.1); --border2: rgba(28,27,24,0.06);
   --nav-w: 220px; --danger: #8B2020; --danger-bg: #FDF0F0;
-  --font-serif: 'Cormorant Garamond', serif;
+  --font-serif: 'Playfair Display', serif;
   --font-sans: 'DM Sans', sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-sans); background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 14px; line-height: 1.7; }
 
-/* NAV */
 nav { width: var(--nav-w); min-width: var(--nav-w); height: 100vh; position: fixed; top: 0; left: 0; background: var(--text); display: flex; flex-direction: column; padding: 40px 0; z-index: 100; overflow-y: auto; }
-.nav-logo { font-family: var(--font-serif); font-size: 20px; font-weight: 300; color: var(--bg); letter-spacing: 0.12em; text-transform: uppercase; padding: 0 28px 28px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px; }
+.nav-logo { font-family: var(--font-serif); font-size: 18px; font-weight: 400; color: var(--bg); letter-spacing: 0.06em; padding: 0 28px 28px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px; }
 .nav-logo span { display: block; font-size: 9px; letter-spacing: 0.2em; color: rgba(255,255,255,0.3); margin-top: 4px; font-family: var(--font-sans); font-weight: 300; text-transform: uppercase; }
 .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 28px; cursor: pointer; color: rgba(255,255,255,0.4); font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; border-left: 2px solid transparent; user-select: none; }
 .nav-item:hover { color: rgba(255,255,255,0.7); }
 .nav-item.active { color: #fff; border-left-color: var(--accent2); }
-.nav-sub { padding: 5px 28px 5px 44px; cursor: pointer; color: rgba(255,255,255,0.28); font-size: 11px; transition: color 0.2s; user-select: none; }
-.nav-sub:hover { color: rgba(255,255,255,0.55); }
 .nav-dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
-/* MAIN */
 main { margin-left: var(--nav-w); flex: 1; }
-.section { display: none; min-height: 100vh; padding: 60px 72px 80px; max-width: 920px; animation: fadeIn 0.25s ease; }
+.section { display: none; min-height: 100vh; padding: 60px 72px 80px; max-width: 860px; animation: fadeIn 0.25s ease; }
 .section.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-/* LAYOUT WITH SIDEBAR */
-.content-with-sidebar { display: grid; grid-template-columns: 1fr 260px; gap: 32px; align-items: start; }
-.sidebar-photos { position: sticky; top: 32px; }
-.sidebar-title { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
-.photo-slot { background: var(--bg2); border: 1px dashed var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; aspect-ratio: 4/3; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; }
-.photo-slot:hover { border-color: var(--accent2); background: var(--accent-light); }
-.photo-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
-.photo-slot-label { font-size: 11px; color: var(--text3); text-align: center; line-height: 1.5; padding: 12px; z-index: 1; }
-.photo-slot input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 2; }
-.upload-icon { margin-bottom: 6px; opacity: 0.35; }
-
-/* TYPOGRAPHY */
 .eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px; }
-h1 { font-family: var(--font-serif); font-size: 48px; font-weight: 300; line-height: 1.12; color: var(--text); margin-bottom: 24px; }
-.lead { font-family: var(--font-serif); font-size: 16px; line-height: 1.85; color: var(--text2); margin-bottom: 40px; max-width: 580px; font-weight: 400; }
+h1 { font-family: var(--font-serif); font-size: 46px; font-weight: 400; line-height: 1.12; color: var(--text); margin-bottom: 24px; }
+.lead { font-family: var(--font-sans); font-size: 14px; line-height: 1.85; color: var(--text2); margin-bottom: 40px; max-width: 580px; font-weight: 400; }
 .sec-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border2); }
-hr.div { border: none; border-top: 1px solid var(--border2); margin: 32px 0; }
 
-/* FAQ CARDS */
 .faq { background: #fff; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
 .faq-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; cursor: pointer; user-select: none; gap: 12px; }
 .faq-header:hover { background: var(--bg2); }
@@ -67,7 +49,7 @@ hr.div { border: none; border-top: 1px solid var(--border2); margin: 32px 0; }
 .faq.open .faq-arrow { transform: rotate(90deg); }
 .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
 .faq.open .faq-body { max-height: 1200px; }
-.faq-a { padding: 0 20px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); line-height: 1.8; border-top: 1px solid var(--border2); padding-top: 14px; margin-top: 0; }
+.faq-a { padding: 14px 20px 18px; font-family: var(--font-sans); font-size: 13px; color: var(--text2); line-height: 1.8; border-top: 1px solid var(--border2); }
 .faq-a p { margin-bottom: 10px; }
 .faq-a p:last-child { margin-bottom: 0; }
 .faq-a ol { margin: 8px 0 12px 20px; }
@@ -75,20 +57,16 @@ hr.div { border: none; border-top: 1px solid var(--border2); margin: 32px 0; }
 .faq-a strong { color: var(--text); font-weight: 500; }
 .group-lbl { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); display: block; margin: 12px 0 4px; }
 .group-lbl:first-child { margin-top: 0; }
-
-/* PERSON */
 .person { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border2); }
 .person:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 .person-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
 
-/* METRICS */
 .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
 .metric { background: var(--bg2); border-radius: 10px; padding: 14px 16px; }
 .metric-label { font-size: 11px; color: var(--text3); margin-bottom: 5px; }
 .metric-value { font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--text); }
 .metric-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
 
-/* TABLES */
 .table-wrap { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
 .fase-header { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 18px 0; }
 .fase-title { font-size: 13px; font-weight: 500; color: var(--text); }
@@ -101,7 +79,6 @@ table.dt td.r { text-align: right; color: var(--text); font-weight: 500; white-s
 table.dt tr:last-child td { border-bottom: none; }
 table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text); font-size: 12px; }
 
-/* YEAR CARDS */
 .year-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
 .year-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
 .year-card.hl { border-color: var(--accent2); }
@@ -109,30 +86,25 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
 .year-value { font-family: var(--font-serif); font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 4px; }
 .year-desc { font-size: 11px; color: var(--text3); line-height: 1.5; }
 
-/* CHART */
 .chart-wrap { position: relative; width: 100%; height: 280px; margin-bottom: 28px; }
 .legend { display: flex; gap: 18px; margin-bottom: 12px; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); }
 .legend-box { width: 10px; height: 10px; border-radius: 2px; }
 
-/* TOTAL */
 .total-row { background: var(--text); border-radius: 10px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; margin: 16px 0 28px; }
 .total-label { font-size: 12px; color: rgba(255,255,255,0.55); }
-.total-value { font-family: var(--font-serif); font-size: 22px; color: #fff; font-weight: 300; }
+.total-value { font-family: var(--font-serif); font-size: 22px; color: #fff; font-weight: 400; }
 
-/* TIMELINE */
 .tl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 28px; }
 .tl-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 11px 13px; }
 .tl-num { font-size: 10px; color: var(--text3); margin-bottom: 3px; }
 .tl-name { font-size: 11px; font-weight: 500; color: var(--text); margin-bottom: 3px; line-height: 1.4; }
 .tl-dur { font-size: 11px; color: var(--text3); }
 
-/* ECO BOX */
 .eco-box { background: var(--accent-light); border: 1px solid var(--accent-mid); border-radius: 12px; padding: 18px 22px; margin-top: 14px; }
 .eco-title { font-size: 13px; font-weight: 500; color: var(--accent); margin-bottom: 6px; }
 .eco-body { font-size: 12px; color: var(--accent); opacity: 0.85; line-height: 1.7; }
 
-/* FLOW */
 .flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
 .flow-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 13px 15px; }
 .flow-card.hl { border-color: var(--accent2); }
@@ -141,12 +113,10 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
 .flow-body { font-size: 11px; color: var(--text2); line-height: 1.6; }
 .flow-value { font-size: 12px; font-weight: 500; color: var(--accent); margin-top: 7px; }
 
-/* TAGS */
 .tag-bad { font-size: 10px; font-weight: 500; background: var(--danger-bg); color: var(--danger); border-radius: 3px; padding: 1px 6px; display: inline-block; margin-top: 4px; }
 .tag-good { font-size: 10px; font-weight: 500; background: var(--accent-light); color: var(--accent); border-radius: 3px; padding: 1px 6px; display: inline-block; margin-top: 4px; }
 .tag-strong { font-size: 10px; font-weight: 500; background: var(--accent-mid); color: var(--accent); border-radius: 3px; padding: 1px 6px; display: inline-block; margin-top: 4px; }
 
-/* COMPARE */
 .compare-wrap { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
 .compare-header { display: grid; grid-template-columns: 1.4fr 1fr 1fr; }
 .ch-blank { padding: 11px; background: var(--bg); }
@@ -158,7 +128,6 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
 .cr-wework { padding: 13px 14px; font-size: 11px; color: var(--text2); background: var(--bg2); border-right: 1px solid var(--border2); line-height: 1.6; }
 .cr-celeiro { padding: 13px 14px; font-size: 11px; color: var(--accent); background: var(--accent-light); line-height: 1.6; }
 
-/* VERDICT */
 .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
 .verdict-card { border-radius: 10px; padding: 15px 17px; }
 .verdict-wework { background: var(--bg2); border: 1px solid var(--border); }
@@ -170,34 +139,44 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
 .verdict-wework .verdict-body { color: var(--text2); }
 .verdict-celeiro .verdict-body { color: var(--accent); opacity: 0.85; }
 
-/* COMPARE INTRO */
 .compare-intro { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; }
-.compare-intro p { font-family: var(--font-sans); font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 10px; }
+.compare-intro p { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 10px; }
 .compare-intro p:last-child { margin-bottom: 0; }
 
 /* IMAGINE */
 .imagine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
 .img-slot { background: var(--bg2); border: 1px dashed var(--border); border-radius: 10px; aspect-ratio: 4/3; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; overflow: hidden; }
 .img-slot:hover { border-color: var(--accent2); background: var(--accent-light); }
+.img-slot.has-image { border-style: solid; cursor: zoom-in; }
 .img-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 .img-slot input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; z-index: 2; }
+.img-slot.has-image input[type=file] { display: none; }
 .img-slot-label { font-size: 11px; color: var(--text3); text-align: center; line-height: 1.5; padding: 10px; z-index: 1; }
-.img-caption { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin: 8px 0 16px; }
+.upload-icon { margin-bottom: 6px; opacity: 0.3; }
 
-/* FUTURE / ARTICLE */
-.article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+/* LIGHTBOX */
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 999; align-items: center; justify-content: center; }
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 4px; }
+.lightbox-close { position: absolute; top: 24px; right: 32px; color: rgba(255,255,255,0.6); font-size: 28px; cursor: pointer; line-height: 1; user-select: none; }
+.lightbox-close:hover { color: #fff; }
+
+.obs { font-size: 11px; color: var(--text3); line-height: 1.6; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border2); }
+
+/* ARTICLE */
+.article-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
 .article-source { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); }
 .article-date { font-size: 11px; color: var(--text3); }
 .article-tag { font-size: 10px; font-weight: 500; background: var(--accent-light); color: var(--accent); border-radius: 3px; padding: 2px 7px; }
-.article-headline { font-family: var(--font-serif); font-size: 40px; font-weight: 400; line-height: 1.15; color: var(--text); margin-bottom: 10px; max-width: 620px; }
-.article-subhead { font-family: var(--font-serif); font-size: 18px; font-weight: 300; color: var(--text2); line-height: 1.5; margin-bottom: 32px; max-width: 580px; font-style: italic; }
-.article-divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
-.article-body { max-width: 620px; }
-.article-body p { font-family: var(--font-sans); font-size: 14px; color: var(--text2); line-height: 1.9; margin-bottom: 18px; }
-.article-body h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--text); margin: 32px 0 12px; }
-.article-pullquote { font-family: var(--font-serif); font-size: 20px; font-weight: 300; font-style: italic; color: var(--accent); border-left: 3px solid var(--accent-mid); padding: 12px 20px; margin: 28px 0; line-height: 1.6; }
-.article-byline { font-size: 11px; color: var(--text3); margin-bottom: 28px; }
-.obs { font-size: 11px; color: var(--text3); line-height: 1.6; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border2); }
+.article-headline { font-family: var(--font-serif); font-size: 36px; font-weight: 400; line-height: 1.2; color: var(--text); margin-bottom: 10px; max-width: 600px; }
+.article-subhead { font-size: 15px; font-weight: 300; color: var(--text2); line-height: 1.6; margin-bottom: 24px; max-width: 560px; font-style: italic; font-family: var(--font-serif); }
+.article-byline { font-size: 11px; color: var(--text3); margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+.article-body { max-width: 600px; }
+.article-body p { font-size: 14px; color: var(--text2); line-height: 1.9; margin-bottom: 18px; }
+.article-body h3 { font-family: var(--font-serif); font-size: 20px; font-weight: 400; color: var(--text); margin: 32px 0 10px; }
+.article-body strong { color: var(--text); font-weight: 500; }
+.article-pullquote { font-family: var(--font-serif); font-size: 18px; font-weight: 400; font-style: italic; color: var(--accent); border-left: 2px solid var(--accent-mid); padding: 10px 18px; margin: 24px 0; line-height: 1.6; }
+.future-note { font-size: 11px; color: var(--text3); font-style: italic; margin-bottom: 32px; padding: 10px 14px; background: var(--bg2); border-radius: 6px; }
 </style>
 </head>
 <body>
@@ -206,10 +185,7 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
   <div class="nav-logo">O Celeiro<span>Proposta de investimento</span></div>
   <div class="nav-item active" onclick="show('identidade',this)"><span class="nav-dot"></span>Identidade</div>
   <div class="nav-item" onclick="show('modelo',this)"><span class="nav-dot"></span>Modelo de Negócio</div>
-  <div class="nav-item" onclick="show('numeros',this)" id="nav-num"><span class="nav-dot"></span>Números</div>
-  <div class="nav-sub" onclick="show('numeros',document.getElementById('nav-num'));goTo('sub-fases')">Fases</div>
-  <div class="nav-sub" onclick="show('numeros',document.getElementById('nav-num'));goTo('sub-receitas')">Receitas</div>
-  <div class="nav-sub" onclick="show('numeros',document.getElementById('nav-num'));goTo('sub-eco')">Ecossistema</div>
+  <div class="nav-item" onclick="show('numeros',this)"><span class="nav-dot"></span>Números</div>
   <div class="nav-item" onclick="show('comparativo',this)"><span class="nav-dot"></span>Comparativo</div>
   <div class="nav-item" onclick="show('imagine',this)"><span class="nav-dot"></span>Imagine</div>
   <div class="nav-item" onclick="show('futuro',this)"><span class="nav-dot"></span>Futuro</div>
@@ -219,88 +195,35 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
 
 <!-- IDENTIDADE -->
 <section class="section active" id="identidade">
-  <div class="content-with-sidebar">
-    <div>
-      <div class="eyebrow">Identidade</div>
-      <h1>O Celeiro</h1>
-      <p class="lead">Somos dois amigos e empreendedores cristãos que, por conexão divina, nos últimos anos foram convidados a trabalhar e viver na cidade de Indaiatuba. A partir dessa cidade são realizadas operações, movimentos e iniciativas que impactam o reino e alcançam diversas cidades no Brasil.<br><br>Resolvemos construir a casa física dessas iniciativas.<br>Ela será um Celeiro e vai inspirar o mundo.</p>
+  <div class="eyebrow">Identidade</div>
+  <h1>O Celeiro</h1>
+  <p class="lead">Somos dois amigos e empreendedores cristãos que, por conexão divina, nos últimos anos foram convidados a trabalhar e viver na cidade de Indaiatuba. A partir dessa cidade são realizadas operações, movimentos e iniciativas que impactam o reino e alcançam diversas cidades no Brasil.<br><br>Resolvemos construir a casa física dessas iniciativas.<br>Ela será um Celeiro e vai inspirar o mundo.</p>
 
-      <div class="faq">
-        <div class="faq-header" onclick="toggleFaq(this)">
-          <span class="faq-q">Contexto e histórico</span>
-          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-        <div class="faq-body"><div class="faq-a">
-          <p>Anos atrás, o fundador da Envisionar, Josué Campanhã, indicou o Fábio Dudus para ser chair do C12 em Campinas e São Paulo. Ele também convidou Vini Trindade, que prontamente mudou-se com a família, para ser sócio e Head de Inovação e Marketing da Envisionar. O Fábio conheceu o Vini, uma amizade começou, e ao longo dos anos os dois experimentaram diversas ideias, combinações e conexões de negócios.</p>
-          <p>Vini é sócio na Envisionar, que representa no Brasil o Global Leadership Summit, maior movimento de formação de líderes global, presente em 115 países e traduzido para mais de 50 idiomas. No Brasil, geram impacto na sociedade por meio de igrejas, empresas e ações sociais em áreas estratégicas da sociedade.</p>
-          <p>Fábio é chair do C12 Campinas e C12 São Paulo, uma organização global parceira do Global Leadership Summit nos EUA, com foco em unir grandes empresários e grandes propósitos. No Brasil, o C12 tem chairs e grupos em diversas cidades e capitais estratégicas.</p>
-          <p>Vini e Fábio, juntamente com a equipe da Envisionar e do C12, têm experimentado nos últimos anos diversas parcerias estratégicas com foco em negócios que gerem impacto para o reino.</p>
-        </div></div>
-      </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Contexto e histórico</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a">
+    <p>Anos atrás, o fundador da Envisionar, Josué Campanhã, indicou o Fábio Dudus para ser chair do C12 em Campinas e São Paulo. Ele também convidou Vini Trindade, que prontamente mudou-se com a família, para ser sócio e Head de Inovação e Marketing da Envisionar. O Fábio conheceu o Vini, uma amizade começou, e ao longo dos anos os dois experimentaram diversas ideias, combinações e conexões de negócios.</p>
+    <p>Vini é sócio na Envisionar, que representa no Brasil o Global Leadership Summit, maior movimento de formação de líderes global, presente em 115 países e traduzido para mais de 50 idiomas. No Brasil, geram impacto na sociedade por meio de igrejas, empresas e ações sociais em áreas estratégicas da sociedade.</p>
+    <p>Fábio é chair do C12 Campinas e C12 São Paulo, uma organização global parceira do Global Leadership Summit nos EUA, com foco em unir grandes empresários e grandes propósitos. No Brasil, o C12 tem chairs e grupos em diversas cidades e capitais estratégicas.</p>
+    <p>Vini e Fábio, juntamente com a equipe da Envisionar e do C12, têm experimentado nos últimos anos diversas parcerias estratégicas com foco em negócios que gerem impacto para o reino.</p>
+  </div></div></div>
 
-      <div class="faq">
-        <div class="faq-header" onclick="toggleFaq(this)">
-          <span class="faq-q">O que é o Celeiro?</span>
-          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-        <div class="faq-body"><div class="faq-a"><p>Um hub de inovação e generosidade, que conecta negócios com propósito, desenvolve líderes estratégicos e serve a cidade com abundância.</p></div></div>
-      </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">O que é o Celeiro?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>Um hub de inovação e generosidade, que conecta negócios com propósito, desenvolve líderes estratégicos e serve a cidade com abundância.</p></div></div></div>
 
-      <div class="faq">
-        <div class="faq-header" onclick="toggleFaq(this)">
-          <span class="faq-q">Por que o nome Celeiro?</span>
-          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-        <div class="faq-body"><div class="faq-a"><p>O empreendimento terá arquitetura tradicional de um celeiro americano — para passar o significado visual e literal do nome. Um celeiro é, por natureza, um lugar de provisão abundante. O nome carrega a essência do local: conectar e produzir recursos que sirvam generosamente à cidade.</p></div></div>
-      </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Por que o nome Celeiro?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>O empreendimento terá arquitetura tradicional de um celeiro americano — para passar o significado visual e literal do nome. Um celeiro é, por natureza, um lugar de provisão abundante. O nome carrega a essência do local: conectar e produzir recursos que sirvam generosamente à cidade.</p></div></div></div>
 
-      <div class="faq">
-        <div class="faq-header" onclick="toggleFaq(this)">
-          <span class="faq-q">Qual é o propósito?</span>
-          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-        <div class="faq-body"><div class="faq-a"><p>Construir um hub local em Indaiatuba que une inovação e generosidade, conecta negócios com propósito, desenvolve líderes estratégicos e serve a cidade com abundância — com sua jornada sendo contada desde o início para gerar influência local e global.</p></div></div>
-      </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Qual é o propósito?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>Construir um hub local em Indaiatuba que une inovação e generosidade, conecta negócios com propósito, desenvolve líderes estratégicos e serve a cidade com abundância — com sua jornada sendo contada desde o início para gerar influência local e global.</p></div></div></div>
 
-      <div class="faq">
-        <div class="faq-header" onclick="toggleFaq(this)">
-          <span class="faq-q">Qual é a visão?</span>
-          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-        <div class="faq-body"><div class="faq-a">
-          <p>Cidades Celeiros. Por todo o Brasil.</p>
-          <p>Cidades que recebem um Celeiro ganham o selo de "Cidade Celeiro" — um reconhecimento e certificação que ativa uma rede de benefícios: acesso a negócios com propósito, formação de líderes estratégicos e iniciativas de impacto social. Um ecossistema que se multiplica cidade a cidade.</p>
-        </div></div>
-      </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">Qual é a visão?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a">
+    <p>Cidades Celeiros. Por todo o Brasil.</p>
+    <p>Cidades que recebem um Celeiro ganham o selo de "Cidade Celeiro" — um reconhecimento e certificação que ativa uma rede de benefícios: acesso a negócios com propósito, formação de líderes estratégicos e iniciativas de impacto social. Um ecossistema que se multiplica cidade a cidade.</p>
+  </div></div></div>
 
-      <div class="faq">
-        <div class="faq-header" onclick="toggleFaq(this)">
-          <span class="faq-q">O que torna o modelo único?</span>
-          <span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
-        </div>
-        <div class="faq-body"><div class="faq-a"><p>Coworkings tradicionais têm ótimos espaços, mas operam sem propósito redentor. Igrejas têm o propósito, mas raramente têm espaços corporativos abertos à cidade. O Celeiro une o melhor dos dois mundos — espaço físico pensado para conexão e inovação, dentro de um ecossistema de generosidade e liderança servidora. Fé e negócios. Em um só lugar. Não apenas sustentável. Abundante.</p></div></div>
-      </div>
-    </div>
-
-    <div class="sidebar-photos">
-      <div class="sidebar-title">Rabiscos do projeto</div>
-      <div class="photo-slot" id="slot1">
-        <input type="file" accept="image/*" onchange="loadImg(this,'slot1')">
-        <svg class="upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        <div class="photo-slot-label">Clique para subir<br>foto ou rabisco</div>
-      </div>
-      <div class="photo-slot" id="slot2">
-        <input type="file" accept="image/*" onchange="loadImg(this,'slot2')">
-        <svg class="upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        <div class="photo-slot-label">Clique para subir<br>foto ou rabisco</div>
-      </div>
-      <div class="photo-slot" id="slot3">
-        <input type="file" accept="image/*" onchange="loadImg(this,'slot3')">
-        <svg class="upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        <div class="photo-slot-label">Clique para subir<br>foto ou rabisco</div>
-      </div>
-    </div>
-  </div>
+  <div class="faq"><div class="faq-header" onclick="toggleFaq(this)"><span class="faq-q">O que torna o modelo único?</span><span class="faq-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span></div>
+  <div class="faq-body"><div class="faq-a"><p>Coworkings tradicionais têm ótimos espaços, mas operam sem propósito redentor. Igrejas têm o propósito, mas raramente têm espaços corporativos abertos à cidade. O Celeiro une o melhor dos dois mundos — espaço físico pensado para conexão e inovação, dentro de um ecossistema de generosidade e liderança servidora. Fé e negócios. Em um só lugar. Não apenas sustentável. Abundante.</p></div></div></div>
 </section>
 
 <!-- MODELO -->
@@ -366,7 +289,7 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
   <div class="eyebrow">Números</div>
   <h1>Investimento e retorno</h1>
 
-  <div id="sub-fases" class="sec-label">Fases de investimento</div>
+  <div class="sec-label">Fases de investimento</div>
 
   <div class="table-wrap"><div class="fase-header"><span class="fase-title">Fase 1 — Aquisição do terreno</span><span class="fase-total">R$ 1.200.000 – 2.000.000</span></div>
   <table class="dt"><tr><th>Item</th><th class="r">Estimativa</th></tr><tr><td>Terreno entre 4.000 e 8.000m² em Indaiatuba</td><td class="r">R$ 1.100.000 – 1.800.000</td></tr><tr><td>Assessoria jurídica, cartório e transferência</td><td class="r">R$ 60.000 – 120.000</td></tr><tr><td>Topografia e laudo técnico</td><td class="r">R$ 15.000 – 30.000</td></tr><tr><td>Regularização ambiental</td><td class="r">R$ 25.000 – 50.000</td></tr></table></div>
@@ -389,7 +312,7 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
     <div class="tl-card"><p class="tl-num">Fase 4</p><p class="tl-name">Operações</p><p class="tl-dur">A partir do mês 18</p></div>
   </div>
 
-  <div id="sub-receitas" class="sec-label">Projeção de receitas</div>
+  <div class="sec-label">Projeção de receitas</div>
 
   <div class="metric-row">
     <div class="metric"><div class="metric-label">Investimento total (médio)</div><div class="metric-value">R$ 6,1M</div><div class="metric-sub">Cenário médio das 4 fases</div></div>
@@ -398,9 +321,9 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
   </div>
 
   <div class="year-grid">
-    <div class="year-card"><div class="year-label">Ano 1 — ramp-up</div><div class="year-value">R$ 2,23M</div><div class="year-desc">50% coworking · 2 eventos/mês · capacitações em estruturação</div></div>
-    <div class="year-card"><div class="year-label">Ano 2 — consolidação</div><div class="year-value">R$ 3,30M</div><div class="year-desc">70% coworking · 4 eventos/mês · capacitações plenas</div></div>
-    <div class="year-card hl"><div class="year-label">Ano 3 — maturidade</div><div class="year-value">R$ 4,32M</div><div class="year-desc">85% coworking · 6 eventos/mês · enterprise consolidado</div></div>
+    <div class="year-card"><div class="year-label">Ano 1 — ramp-up</div><div class="year-value">R$ 2,23M</div><div class="year-desc">50% coworking · 2 eventos/mês</div></div>
+    <div class="year-card"><div class="year-label">Ano 2 — consolidação</div><div class="year-value">R$ 3,30M</div><div class="year-desc">70% coworking · 4 eventos/mês</div></div>
+    <div class="year-card hl"><div class="year-label">Ano 3 — maturidade</div><div class="year-value">R$ 4,32M</div><div class="year-desc">85% coworking · 6 eventos/mês</div></div>
   </div>
 
   <div class="legend">
@@ -423,17 +346,17 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
     </table>
   </div>
 
-  <div id="sub-eco" class="sec-label">Ecossistema — o Celeiro 1 financia o Celeiro 2</div>
+  <div class="sec-label">Ecossistema — o Celeiro 1 financia o Celeiro 2</div>
 
   <div class="flow-grid">
-    <div class="flow-card"><div class="flow-year">Ano 1</div><div class="flow-title">Ramp-up e consolidação</div><div class="flow-body">Celeiro 1 em operação. Receita crescendo. Resultado líquido reinvestido na reserva de expansão.</div><div class="flow-value">+ R$ 1,22M líquido</div></div>
-    <div class="flow-card"><div class="flow-year">Ano 2</div><div class="flow-title">Maturidade e reserva</div><div class="flow-body">Ocupação em 70%. Reserva acumulada chega a R$ 3M. Suficiente para adquirir terreno e iniciar projeto do Celeiro 2.</div><div class="flow-value">+ R$ 1,81M líquido</div></div>
-    <div class="flow-card hl"><div class="flow-year">Ano 3</div><div class="flow-title">Celeiro 2 começa</div><div class="flow-body">Reserva acumulada de R$ 5,4M cobre Fase 1 e Fase 2 do Celeiro 2 — terreno e projeto. Operação autônoma.</div><div class="flow-value">+ R$ 2,37M líquido</div></div>
+    <div class="flow-card"><div class="flow-year">Ano 1</div><div class="flow-title">Ramp-up e consolidação</div><div class="flow-body">Celeiro 1 em operação. Resultado líquido reinvestido na reserva de expansão.</div><div class="flow-value">+ R$ 1,22M líquido</div></div>
+    <div class="flow-card"><div class="flow-year">Ano 2</div><div class="flow-title">Maturidade e reserva</div><div class="flow-body">Reserva acumulada chega a R$ 3M. Suficiente para adquirir terreno do Celeiro 2.</div><div class="flow-value">+ R$ 1,81M líquido</div></div>
+    <div class="flow-card hl"><div class="flow-year">Ano 3</div><div class="flow-title">Celeiro 2 começa</div><div class="flow-body">R$ 5,4M acumulados cobrem Fase 1 e 2 do Celeiro 2. Sem novo investidor externo.</div><div class="flow-value">+ R$ 2,37M líquido</div></div>
   </div>
 
   <div class="eco-box">
-    <div class="eco-title">Celeiro 2 — financiado pelo Celeiro 1</div>
-    <div class="eco-body">Com R$ 5,4M líquidos acumulados em 3 anos, o Celeiro 1 cobre integralmente a aquisição do terreno e o projeto e licenças do Celeiro 2 — e ainda mantém reserva operacional. A construção do Celeiro 2 pode ser financiada pelo fluxo contínuo do Celeiro 1 a partir do Ano 4, sem necessidade de novo investidor externo. O modelo se torna autorreplicante. Cada Celeiro planta o próximo.</div>
+    <div class="eco-title">Cada Celeiro planta o próximo</div>
+    <div class="eco-body">Com R$ 5,4M líquidos acumulados em 3 anos, o Celeiro 1 cobre integralmente a aquisição do terreno e o projeto do Celeiro 2 — e ainda mantém reserva operacional. A partir do Ano 4, o fluxo contínuo financia a construção sem necessidade de novo investidor externo. O modelo se torna autorreplicante.</div>
   </div>
   <p class="obs">Valores estimados com base no mercado de Indaiatuba e região (2025). Sujeitos a revisão após planejamento financeiro formal.</p>
 </section>
@@ -444,7 +367,7 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
   <h1>Celeiro vs WeWork</h1>
 
   <div class="compare-intro">
-    <p>A WeWork é a maior referência global em espaços de trabalho compartilhado — e também o maior estudo de caso sobre o que não fazer quando se escala um modelo sem fundação sólida. Comparar o Celeiro com a WeWork não é arrogância. É clareza estratégica.</p>
+    <p>A WeWork é a maior referência global em espaços de trabalho compartilhado — e também o maior estudo de caso sobre o que não fazer quando se escala um modelo sem fundação sólida.</p>
     <p>A visão do Celeiro é de expansão. Queremos estar em cada cidade estratégica do Brasil, tal como a WeWork queria estar em cada cidade do mundo. A diferença está no ritmo e no propósito: onde a WeWork correu para crescer e lucrar, o Celeiro cresce devagar para durar e transformar. Cada nova unidade só nasce quando a anterior está sólida — cultural, financeira e espiritualmente.</p>
     <p>A WeWork construiu um império sobre aluguel. O Celeiro constrói sobre pertencimento. Um dependia de investidores para sobreviver. O outro foi desenhado para se autofinanciar. Um vendia a ilusão de comunidade. O outro já tem a comunidade antes de ter o espaço.</p>
   </div>
@@ -464,8 +387,8 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
   </div>
 
   <div class="verdict-grid">
-    <div class="verdict-card verdict-wework"><div class="verdict-title">Por que a WeWork quebrou</div><div class="verdict-body">Construiu um passivo imobiliário de US$ 47 bilhões apostando que a ocupação nunca cairia. Quando caiu, não havia reserva, não havia diversificação e não havia comunidade real para segurar os membros. Era arbitragem imobiliária vestida de empresa de tecnologia.</div></div>
-    <div class="verdict-card verdict-celeiro"><div class="verdict-title">Por que o Celeiro pode durar</div><div class="verdict-body">Possui o ativo, diversifica a receita e serve uma comunidade que já existe antes do espaço. O que a WeWork fingiu ser — uma comunidade com missão — o Celeiro já é. O espaço físico não cria a comunidade. Ele a abriga.</div></div>
+    <div class="verdict-card verdict-wework"><div class="verdict-title">Por que a WeWork quebrou</div><div class="verdict-body">Construiu um passivo imobiliário de US$ 47 bilhões apostando que a ocupação nunca cairia. Quando caiu, não havia reserva, não havia diversificação e não havia comunidade real para segurar os membros.</div></div>
+    <div class="verdict-card verdict-celeiro"><div class="verdict-title">Por que o Celeiro pode durar</div><div class="verdict-body">Possui o ativo, diversifica a receita e serve uma comunidade que já existe antes do espaço. O espaço físico não cria a comunidade. Ele a abriga.</div></div>
   </div>
 </section>
 
@@ -500,7 +423,7 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
 <!-- FUTURO -->
 <section class="section" id="futuro">
   <div class="eyebrow">Futuro</div>
-  <p style="font-size:12px;color:var(--text3);margin-bottom:32px;font-style:italic;">O que se segue é uma projeção imaginativa do que o Celeiro pode se tornar. Um exercício de visão — escrito no presente, para ser lido no futuro.</p>
+  <p class="future-note">O que se segue é uma projeção imaginativa — escrita no presente, para ser lida no futuro.</p>
 
   <div class="article-meta">
     <span class="article-source">Forbes Brasil</span>
@@ -508,51 +431,42 @@ table.dt tr.sub td { background: var(--bg2); font-weight: 500; color: var(--text
     <span class="article-tag">Negócios com Propósito</span>
   </div>
 
-  <h1 class="article-headline">A cidade que virou celeiro: como Indaiatuba se tornou referência global em inovação e generosidade</h1>
-  <p class="article-subhead">O que começou como um hub de coworking numa cidade do interior paulista hoje inspira líderes em 40 países e foi apresentado como caso de estudo no Global Leadership Summit em Chicago.</p>
+  <h1 class="article-headline">Indaiatuba, a primeira Cidade Celeiro do Brasil</h1>
+  <p class="article-subhead">Como um hub de coworking no interior de São Paulo se tornou referência em liderança, generosidade e impacto urbano.</p>
   <p class="article-byline">Por Beatriz Cavalcante · Edição impressa Forbes Brasil, março de 2030</p>
 
-  <hr class="article-divider">
-
   <div class="article-body">
-    <p>Quando Vinicius Trindade e Fábio Dudus compraram um terreno às margens de uma das principais avenidas de Indaiatuba, em 2025, a ideia parecia simples demais para ser revolucionária: construir um celeiro americano no interior do Brasil e transformá-lo num espaço de trabalho com propósito. Cinco anos depois, o Celeiro é considerado um dos experimentos mais bem-sucedidos de desenvolvimento urbano orientado por valores cristãos no mundo.</p>
+    <p>Indaiatuba não é uma capital. Não tem bolsa de valores, não tem sede de multinacional, não aparece nos rankings de startups. Mas desde 2025, a cidade abriga algo que cidades maiores ainda não conseguiram construir: um lugar onde trabalho, formação e propósito dividem o mesmo endereço.</p>
 
-    <p>"A gente não queria criar uma empresa. A gente queria criar um ambiente", diz Trindade, hoje à frente de uma rede com seis unidades em operação e outras quatro em construção. "O espaço físico sempre foi só o começo."</p>
-
-    <div class="article-pullquote">"O espaço físico sempre foi só o começo. O que a gente queria mesmo era dar um endereço para o que já existia."</div>
-
-    <h3>O que é uma Cidade Celeiro</h3>
-    <p>O conceito de Cidade Celeiro nasceu da expansão natural do modelo. Quando o primeiro Celeiro de Indaiatuba completou três anos de operação e gerou superávit suficiente para financiar uma segunda unidade sem investidor externo, ficou claro que o modelo era replicável — e que cada cidade que recebesse um Celeiro poderia se tornar um polo de líderes formados, negócios conectados e impacto social mensurável.</p>
-    <p>Hoje, uma Cidade Celeiro é aquela que recebe o empreendimento físico e passa por um processo de certificação que envolve formação de líderes locais, conexão com a rede Envisionar e C12, e comprometimento com ao menos uma iniciativa de impacto social anual. O selo não é apenas simbólico — ele ativa uma rede de benefícios reais para os empresários da cidade.</p>
+    <p>O Celeiro é um hub de coworking com arquitetura de celeiro americano, cafeteria, auditório, jardim e área de eventos. Na descrição fria, é isso. Na prática, é um ecossistema que nos últimos cinco anos formou mais de 800 líderes, conectou centenas de empresas e transformou a dinâmica de liderança empresarial cristã em toda a região.</p>
 
     <h3>Como surgiu</h3>
-    <p>A história começa antes do espaço físico. Trindade e Dudus já operavam, respectivamente, a Envisionar e o C12 — duas organizações com décadas de atuação no desenvolvimento de líderes cristãos em igrejas e empresas. A parceria entre os dois acumulava eventos, programas e conexões estratégicas que aconteciam em espaços alugados, igrejas e escritórios improvisados.</p>
-    <p>"A gente percebia que tinha um ecossistema real acontecendo, mas sem casa", lembra Dudus. "Todo mundo se encontrava, mas em lugares que não tinham a nossa cara. A ideia do Celeiro foi simples: construir a casa do que já existia."</p>
+    <p>A história começa antes do espaço. Vinicius Trindade, sócio da Envisionar, e Fábio Dudus, chair do C12 em Campinas e São Paulo, já operavam programas de formação de líderes há anos — em igrejas, escritórios alugados, espaços improvisados. A comunidade existia. O endereço é que faltava.</p>
 
-    <h3>O propósito que move tudo</h3>
-    <p>Diferente de outros hubs de inovação, o Celeiro não nasceu da lógica de startups ou de capital de risco. Nasceu da teologia da abundância — da crença de que negócios alinhados com valores do reino de Deus têm o poder de transformar cidades, não apenas gerar lucro.</p>
-    <p>Essa premissa moldou cada decisão do modelo: a arquitetura rústica e acolhedora que remete a um celeiro americano, a cafeteria aberta à comunidade, os programas de formação de liderança acessíveis, os eventos culturais em parceria com a prefeitura, os casamentos realizados nos finais de semana na área externa. Cada frente de receita foi desenhada para ser, ao mesmo tempo, financeiramente sustentável e culturalmente coerente com o propósito.</p>
+    <div class="article-pullquote">"A gente não criou uma comunidade para preencher um espaço. A gente construiu um espaço para uma comunidade que já existia."</div>
+
+    <p>A construção começou em 2025, financiada por um grupo de investidores que entrou sem expectativa de retorno financeiro — o modelo era claro desde o início: investimento no reino, não em dividendos. O Celeiro abriu as portas em 2027 e atingiu superávit operacional no terceiro ano.</p>
 
     <h3>O que acontece lá</h3>
-    <p>Numa segunda-feira típica no Celeiro de Indaiatuba, o espaço recebe entre 60 e 80 profissionais. Nos escritórios privativos, empresas de tecnologia, consultorias e startups de impacto. Nas salas de reunião, rodadas de mentoria e imersões de liderança. Na cafeteria, conversas que misturam estratégia empresarial e propósito de vida.</p>
-    <p>Às quartas-feiras, o auditório recebe o programa semanal de capacitação — uma trilha de liderança que já formou mais de 800 executivos desde a inauguração. Nos fins de semana, a área externa se transforma: casamentos, ensaios fotográficos, jantares estratégicos e eventos culturais. O Celeiro nunca para.</p>
+    <p>De segunda a sexta, o espaço funciona como coworking. Empresas de diferentes setores ocupam mesas compartilhadas, salas privativas e escritórios inteiros. Às quartas, o auditório recebe a trilha semanal de formação de líderes. Nos fins de semana, casamentos, cerimônias, ensaios fotográficos e jantares estratégicos ocupam a área externa. O Celeiro gera receita todos os dias da semana.</p>
 
-    <h3>O modelo de negócio que se autofinancia</h3>
-    <p>Um dos aspectos mais estudados do Celeiro é sua estrutura financeira. Ao contrário da WeWork — que alugava imóveis com contratos longos e entrou em colapso quando a ocupação caiu — o Celeiro constrói e possui seus ativos. Sem aluguel para pagar, os custos fixos são previsíveis e o break-even, alcançável.</p>
-    <p>A diversificação de receita — coworking, capacitações, eventos, cafeteria e área externa — garante que o modelo gere caixa sete dias por semana, independente da taxa de ocupação do coworking. O resultado: o primeiro Celeiro atingiu superávit no terceiro ano de operação e financiou integralmente a construção do segundo, em Campinas, sem precisar de novo investidor.</p>
+    <h3>O modelo que se autofinancia</h3>
+    <p>A estrutura financeira do Celeiro foi desenhada para não depender de capital externo depois da primeira unidade. Com receitas diversificadas, o modelo acumulou caixa suficiente para financiar uma segunda unidade em Campinas sem buscar novos investidores. Uma terceira está em construção em Ribeirão Preto.</p>
 
-    <h3>A inspiração que chegou ao mundo</h3>
-    <p>Em agosto de 2029, Vinicius Trindade subiu ao palco do Global Leadership Summit em Chicago para apresentar o modelo Celeiro a uma audiência de mais de 12 mil líderes de 115 países. A apresentação, que durou 18 minutos, foi uma das mais compartilhadas na história do evento.</p>
-    <p>"O que impressionou não foi o número de unidades ou a receita", diz Stuart Hastings, diretor de conteúdo do GLS. "Foi a coerência entre o que eles pregavam e o que eles construíram. Era um modelo que servia ao lucro servindo às pessoas."</p>
-    <p>Desde então, líderes de Portugal, Moçambique, Angola e Estados Unidos entraram em contato para replicar o modelo em suas cidades. A equipe do Celeiro estuda como expandir internacionalmente sem perder o que tornou o modelo único: a lentidão intencional, a curadoria cultural e o propósito que precede o negócio.</p>
+    <h3>A visão que chegou ao mundo</h3>
+    <p>Em agosto de 2029, Trindade apresentou o modelo no Global Leadership Summit em Chicago, diante de líderes de 115 países. A apresentação não foi sobre números. Foi sobre a pergunta que moveu o projeto desde o início: é possível construir algo sustentável sem abrir mão do propósito?</p>
 
-    <div class="article-pullquote">"Queríamos provar que é possível construir algo belo, sustentável e generoso ao mesmo tempo. Acho que provamos."<br><span style="font-size:13px;font-style:normal;">— Vinicius Trindade, cofundador do Celeiro</span></div>
-
-    <p>Indaiatuba, que em 2025 era conhecida principalmente como cidade-dormitório da região de Campinas, hoje é identificada como a primeira Cidade Celeiro do Brasil — e o ponto de partida de um movimento que ainda está no começo.</p>
+    <p>A resposta, cinco anos depois, parece ser sim.</p>
   </div>
 </section>
 
 </main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">×</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
 <script>
 function show(id, el) {
@@ -561,20 +475,11 @@ function show(id, el) {
   document.getElementById(id).classList.add('active');
   if (el) el.classList.add('active');
   if (id === 'numeros') setTimeout(initChart, 80);
-  window.scrollTo(0, 0);
-}
-
-function goTo(id) {
-  setTimeout(() => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 160);
+  window.scrollTo(0,0);
 }
 
 function toggleFaq(header) {
-  const card = header.parentElement;
-  const isOpen = card.classList.contains('open');
-  card.classList.toggle('open', !isOpen);
+  header.parentElement.classList.toggle('open');
 }
 
 function loadImg(input, slotId) {
@@ -586,11 +491,26 @@ function loadImg(input, slotId) {
     let img = slot.querySelector('img');
     if (!img) { img = document.createElement('img'); slot.appendChild(img); }
     img.src = e.target.result;
-    slot.querySelector('.img-slot-label, .photo-slot-label') && (slot.querySelector('.img-slot-label, .photo-slot-label').style.display = 'none');
-    slot.querySelector('svg') && (slot.querySelector('svg').style.display = 'none');
+    slot.classList.add('has-image');
+    const lbl = slot.querySelector('.img-slot-label');
+    const svg = slot.querySelector('svg');
+    if (lbl) lbl.style.display = 'none';
+    if (svg) svg.style.display = 'none';
+    slot.onclick = () => openLightbox(e.target.result);
   };
   reader.readAsDataURL(file);
 }
+
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 let chartDone = false;
 function initChart() {
